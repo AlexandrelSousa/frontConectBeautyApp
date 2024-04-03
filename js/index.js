@@ -33,5 +33,7 @@ function authenticateUser(){
 
 function replaceCadastro(){
   location.replace("./html/cadastro.html", "_self");
-  console.log("oi")
+}
+function replaceCadastroEmpresa(){
+  location.replace("./html/cadastroEmpresa.html", "_self");
 }

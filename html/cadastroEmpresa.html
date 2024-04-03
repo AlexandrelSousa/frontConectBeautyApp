@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conect Beauty Cadastro</title>
+    <link rel="stylesheet" type="text/css" href="../css/cadastroEmpresa.css">
+    <script src="../js/cadastroEmpresa.js"></script>
+    <link rel="shortcut icon" type="imagex/png" href="../assets/logo3.ico">
+</head>
+<body>
+    <div class="linha-horizontal"></div>
+    <div class="login-box">
+        <div class="login-box-line" id="form1">
+            <div class="login-box-titulo"><h1>CADASTRAR<br>EMPRESA</h1></div>
+            <div class="login-box-login">
+                <label class="login-box-login-icon"><img src="../assets/enterprise.png"></label>
+                <input type="email" class="login-box-login-input" placeholder="CNPJ" id="cnpj">
+            </div>
+            <div class="login-box-login">
+                <label class="login-box-login-icon"><img src="../assets/password-icon.png"></label>
+                <input type="text" class="login-box-login-input" placeholder="SENHA" id="senha">
+            </div>
+            <div class="login-box-senha">
+                <label class="login-box-senha-icon"><img src="../assets/enterpriseName.png"></label>
+                <input type="number" class="login-box-senha-input" placeholder="NOME EMPRESA" id="nome">
+            </div>
+            <div class="login-box-login">
+                <label class="login-box-login-icon"><img src="../assets/telefone-icon.png"></label>
+                <input type="password" class="login-box-login-input" placeholder="TELEFONE" id="telefone">
+            </div>
+            <div class="login-box-senha">
+                <label class="login-box-login-icon"><img src="../assets/pin.png"></label>
+                <input type="password" class="login-box-login-input" placeholder="CIDADE" id="cidade">
+            </div>
+            <div class="login-box-buttom"><button disabled onclick="previousForm()" class="buttonControlPage"><</button><button onclick="nextForm()" class="buttonControlPage">></button><button onclick="registerUser()" class="OKButton" disabled>OK</button></div>    
+        </div>
+        <!-- SEGUNDA PARTE DO FORMULÁRIO  -->
+        <div class="login-box-line" id="form2" style="display: none;">
+            <div class="login-box-titulo"><h1>CADASTRAR<br>EMPRESA</h1></div>
+            <div class="login-box-login">
+                <label class="login-box-login-icon"><img src="../assets/pin.png"></label>
+                <input type="email" class="login-box-login-input" placeholder="LOGRADOURO" id="logradouro">
+            </div>
+            <div class="login-box-login">
+                <label class="login-box-login-icon"><img src="../assets/pin.png"></label>
+                <input type="text" class="login-box-login-input" placeholder="NÚMERO" id="numero">
+            </div>
+            <div class="login-box-senha" style="height: 42%;">
+                <label class="login-box-senha-icon"><img src="../assets/info.png"></label>
+                <input type="number" class="login-box-senha-input" placeholder="DESCRIÇÃO" id="descrição">
+            </div>
+            <div class="login-box-buttom"><button onclick="previousForm()" class="buttonControlPage"><</button><button onclick="nextNextForm()" class="buttonControlPage">></button><button onclick="registerUser()" class="OKButton" disabled>OK</button></div>
+        </div>
+        <!-- TERCEIRA PARTE DO FORMULÁRIO  -->
+        <div class="login-box-line" id="form3" style="display: none;">
+            <div class="login-box-titulo"><h1>CADASTRAR<br>EMPRESA</h1></div>
+            <div class="login-box-funcionamento">
+                <div class="login-box-funcionamento-titulo">
+                    <h2>DIAS DE FUNCIONAMENTO</h2>
+                </div>
+                <div class="login-box-funcionamento-dias">
+                    <label class="login-box-dias-dia">DOM</label>
+                    <label class="login-box-dias-dia">SEG</label>
+                    <label class="login-box-dias-dia">TER</label>
+                    <label class="login-box-dias-dia">QUA</label>
+                    <label class="login-box-dias-dia">QUI</label>
+                    <label class="login-box-dias-dia">SEX</label>
+                    <label class="login-box-dias-dia">SAB</label>
+                </div>
+                <div class="login-box-funcionamento-checks">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                    <input type="checkbox" class="login-box-login-input" id="numero">
+                </div>
+            </div>
+            <div class="login-box-funcionamento">
+                <div class="login-box-funcionamento-titulo2">
+                    <h2>HORÁRIO DE FUNCIONAMENTO</h2>
+                </div>
+                <div class="login-box-funcionamento-horas">
+                    <label class="login-box-dias-dia">DAS</label>
+                    <input type="time">
+                    <label class="login-box-dias-dia">AS</label>
+                    <input type="time">
+                </div>
+            </div>
+            <div class="login-box-buttom"><button onclick="previousForm()" class="buttonControlPage"><</button><button onclick="nextNextForm()" class="buttonControlPage">></button><button onclick="registerUser()" class="OKButton" disabled>OK</button></div>
+        </div>
+    </div>
+</body>
+</html>
