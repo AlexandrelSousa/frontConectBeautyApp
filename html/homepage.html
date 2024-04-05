@@ -5,10 +5,77 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Conect Beauty Cadastro</title>
-        <link rel="stylesheet" type="text/css" href="../css/cadastro.css">
-        <script src="../js/cadastro.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+        <script src="../js/homepage.js"></script>
         <link rel="shortcut icon" type="imagex/png" href="../assets/logo3.ico">
     <body>
-        
+        <div class="homepage">
+            <div class="header"></div>
+            <div class="main"></div>
+            <div class="footer"></div>
+            <div class="screen">
+                <div class="screen-order">
+                    <header>
+                        <h1>CONECT BEAUTY</h1>
+                        <img src="../assets/logo3.ico" alt="">
+                    </header>
+                    <main>
+                        <div class="feed" id="feed">FEED</div>
+                        <div class="perfil" id="perfil">
+                            <div class="perfil-box">
+                                <div class="perfil-box-titulo">
+                                    <h2>Nome da empresa</h2>
+                                </div>
+                                <div class="perfil-box-info">
+                                    <div class="perfil-box-info-endereco">
+                                        <p>Cidade-CC,</p>
+                                    </div>
+                                    <div class="perfil-box-info-endereco">
+                                        <p>Tv. Travessa Atravessada - Bairro 000</p>
+                                    </div>
+                                    <div class="perfil-box-info-funcionamento">
+                                        <p>Aberto das 7:00h as 18:00h</p>
+                                    </div>
+                                    <div class="perfil-box-info-avaliacoes">
+                                        <div class="perfil-box-info-avaliacoes-estrelas">
+                                            <div class="perfil-box-info-avaliacoes-estrelas-1"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-2"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-3"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-4"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-5"></div>
+                                        </div>
+                                        <div class="perfil-box-info-avaliacoes-numero"><p>(0.0)</p></div>
+                                        <div class="perfil-box-info-avaliacoes-quantidade-reviews"><p>0 reviews</p></div>
+                                    </div>
+                                </div>
+                                <div class="perfil-box-menu">
+                                    <ul>
+                                        <li><p onclick="buttonProcedimentos()">Procedimentos</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-procedimentos"></div></li>
+                                        <li><p onclick="buttonAvaliacoes()">Avaliações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-avaliacoes" style="background-color: #fff"></div></li>
+                                        <li><p onclick="buttonInformacoes()">Informações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-informacoes" style="background-color: #fff"></div></li>
+                                    </ul>
+                                </div>
+                                <div class="perfil-box-procedimentos" id="perfil-box-procedimentos"></div>
+                                <div class="perfil-box-avaliações" id="perfil-box-avaliações" style="display: none"></div>
+                                <div class="perfil-box-informações" id="perfil-box-informações" style="display: none">
+                                    <div class="perfil-box-informações-relatorio"></div>
+                                    <div class="perfil-box-informações-delete" onclick="excluirPerfil()">EXCLUIR PERFIL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <footer>
+                        <div class="homeButtom">
+                            <img src="../assets/home-pink.png" alt="" onclick="feedButton()">
+                            <label for="" onclick="feedButton()">HOME</label>
+                        </div>
+                        <div class="PerfilButtom">
+                            <img src="../assets/user-icon-pink.png" alt="" onclick="perfilButton()">
+                            <label for="" onclick="perfilButton()">PERFIL</label>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </body>
 </head>
