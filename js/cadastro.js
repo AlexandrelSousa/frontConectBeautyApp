@@ -9,7 +9,7 @@ function registerUser(){
     };
     console.log("email: "+ userData.email + "\nnome: " + userData.nome + "\ntelefone: " + userData.telefone + "\nsenha: " + userData.senha + "\nconfirmSenha: " + userData.confirmSenha)
     
-    fetch('http://localhost:3030/cadastro', {
+    fetch('http://localhost:3030/clientes/cadastro', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
