@@ -4,7 +4,6 @@ function authenticateUser(){
     emailOuCNPJ: document.getElementById("email").value,
     senha: document.getElementById("senha").value
   };
-  console.log("email: "+ userData.email + "\nsenha: " + userData.senha)
   
   fetch('http://localhost:3030/login', {
     method: 'POST',

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Conect Beauty Cadastro</title>
+        <title>Conect Beauty</title>
         <link rel="stylesheet" type="text/css" href="../css/homepage.css">
         <script src="../js/homepage.js"></script>
         <link rel="shortcut icon" type="imagex/png" href="../assets/logo3.ico">
@@ -25,6 +25,7 @@
                             <div class="perfil-box">
                                 <div class="perfil-box-titulo">
                                     <h2 class="perfil-box-titulo-h2" id="perfil-box-titulo-h2">Nome da empresa</h2>
+                                    <img src="../assets/edit-icon.png" alt="" onclick="editarPerfilBox()">
                                 </div>
                                 <div class="perfil-box-info">
                                     <div class="perfil-box-info-endereco">
@@ -36,44 +37,137 @@
                                     <div class="perfil-box-info-funcionamento">
                                         <p id="perfil-box-info-funcionamento">Aberto das 7:00h as 18:00h</p>
                                     </div>
-                                    <div class="perfil-box-info-avaliacoes">
+                                    <div class="perfil-box-info-avaliacoes" id="perfil-box-info-avaliacoes">
                                         <div class="perfil-box-info-avaliacoes-estrelas">
-                                            <div class="perfil-box-info-avaliacoes-estrelas-1"></div>
-                                            <div class="perfil-box-info-avaliacoes-estrelas-2"></div>
-                                            <div class="perfil-box-info-avaliacoes-estrelas-3"></div>
-                                            <div class="perfil-box-info-avaliacoes-estrelas-4"></div>
-                                            <div class="perfil-box-info-avaliacoes-estrelas-5"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-1" id="perfil-box-info-avaliacoes-estrelas-1"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-2" id="perfil-box-info-avaliacoes-estrelas-2"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-3" id="perfil-box-info-avaliacoes-estrelas-3"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-4" id="perfil-box-info-avaliacoes-estrelas-4"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-5" id="perfil-box-info-avaliacoes-estrelas-5"></div>
                                         </div>
                                         <div class="perfil-box-info-avaliacoes-numero"><p>(0.0)</p></div>
                                         <div class="perfil-box-info-avaliacoes-quantidade-reviews"><p>0 reviews</p></div>
                                     </div>
+                                    <div class="perfil-box-info-botaoExcluir">
+                                        <button class="perfil-box-informações-delete" style="height: 50%;" onclick="excluirConfirm()">EXCLUIR CONTA</button>
+                                    </div>
                                 </div>
                                 <div class="perfil-box-menu">
                                     <ul>
-                                        <li><p onclick="buttonProcedimentos()">Procedimentos</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-procedimentos"></div></li>
-                                        <li><p onclick="buttonAvaliacoes()">Avaliações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-avaliacoes" style="background-color: #fff"></div></li>
-                                        <li><p onclick="buttonInformacoes()">Informações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-informacoes" style="background-color: #fff"></div></li>
+                                        <li id="button-procedimentos"><p id="button-procedimentos-p" onclick="buttonProcedimentos()">Procedimentos</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-procedimentos"></div></li>
+                                        <li id="button-avaliacoes"><p id="button-avaliacoes-p" onclick="buttonAvaliacoes()">Avaliações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-avaliacoes" style="background-color: #fff"></div></li>
+                                        <li id="button-informacoes"><p id="button-informacoes-p" onclick="buttonInformacoes()">Informações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-informacoes" style="background-color: #fff"></div></li>
                                     </ul>
                                 </div>
                                 <div class="perfil-box-procedimentos" id="perfil-box-procedimentos"></div>
                                 <div class="perfil-box-avaliações" id="perfil-box-avaliações" style="display: none"></div>
                                 <div class="perfil-box-informações" id="perfil-box-informações" style="display: none">
                                     <div class="perfil-box-informações-relatorio"></div>
-                                    <div class="perfil-box-informações-delete" onclick="excluirPerfil()">EXCLUIR PERFIL</div>
+                                    <div class="perfil-box-informações-delete" onclick="excluirConfirm()">EXCLUIR PERFIL</div>
                                 </div>
                             </div>
                         </div>
                     </main>
                     <footer>
                         <div class="homeButtom">
-                            <img src="../assets/home-pink.png" alt="" onclick="feedButton()">
+                            <img id="homeButton-icon" src="../assets/home.png" alt="" onclick="feedButton()">
                             <label for="" onclick="feedButton()">HOME</label>
                         </div>
                         <div class="PerfilButtom">
-                            <img src="../assets/user-icon-pink.png" alt="" onclick="perfilButton()">
+                            <img id="perfilButton-icon" src="../assets/user-icon.png" alt="" onclick="perfilButton()">
                             <label for="" onclick="perfilButton()">PERFIL</label>
                         </div>
                     </footer>
+                </div>
+            </div>
+            <div class="fundoEscuro" id="fundoEscuro">
+                <div class="confirmDelete">
+                    <h3>DESEJA EXCLUIR A CONTA?</h3>
+                    <div class="confirm-delete-buttons">
+                        <button onclick="excluirPerfil()">SIM</button>
+                        <button onclick="naoExcluir()">NÃO</button>
+                    </div>
+                </div>
+            </div>
+            <div class="fundoEscuro" id="fundoEscuro2">
+                <div class="confirmDelete" id="confirmEdit">
+                    <div class="confirmEdit-fechar"><button class="X" onclick="fecharEdit()">X</button></div>
+                    <div class="confirmEdit-main">
+                        <h3>EDITAR INFORMAÇÕES DA CONTA</h3>
+                        <div class="campoInfoEdit ConfirmEdit-cnpj" id="ConfirmEdit-cnpj">
+                            <input type="text" name="" class="edit-field" id="edit-cnpj" placeholder="CNPJ">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-senha" id="ConfirmEdit-senha">
+                            <input type="password" name="" class="edit-field" id="edit-senha" placeholder="SENHA">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-nome" id="ConfirmEdit-nome">
+                            <input type="text" name="" class="edit-field" id="edit-nome" placeholder="NOME">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-telefone" id="ConfirmEdit-telefone">
+                            <input type="text" name="" class="edit-field" id="edit-telefone" placeholder="TELEFONE">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-cidade" id="ConfirmEdit-cidade">
+                            <input type="text" name="" class="edit-field" id="edit-cidade" placeholder="CIDADE">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-bairro" id="ConfirmEdit-bairro">
+                            <input type="text" name="" class="edit-field" id="edit-bairro" placeholder="BAIRRO">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-logradouro" id="ConfirmEdit-logradouro">
+                            <input type="text" name="" class="edit-field" id="edit-logradouro" placeholder="LOGRADOURO">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-numero" id="ConfirmEdit-numero">
+                            <input type="number" name="" class="edit-field" id="edit-numero" placeholder="NÚMERO">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-descricao" id="ConfirmEdit-descricao">
+                            <textarea type="text" name="" class="edit-descricao" id="edit-descricao" placeholder="DESCRIÇÃO"></textarea>
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-horarioFunc" id="ConfirmEdit-horarioFunc">
+                            <label for="">DAS</label><input type="time" class="input-edit-hora" name="" id="edit-hora-abre"><label for="">ÀS</label><input type="time" name="" id="edit-hora-fecha" class="input-edit-hora">
+                        </div>
+                        <div class="campoInfoEdit ConfirmEdit-diasFunc" id="ConfirmEdit-diasFunc" style="margin-top: 6%">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" name="" id="edit-dia-dom" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-seg" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-ter" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-qua" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-qui" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-sex" class="edit-checkbox">
+                                    <input type="checkbox" name="" id="edit-dia-sab" class="edit-checkbox">
+                                </li>
+                                <li>
+                                    <span class="edit-span">DOM</span>
+                                    <span class="edit-span">SEG</span>
+                                    <span class="edit-span">TER</span>
+                                    <span class="edit-span">QUA</span>
+                                    <span class="edit-span">QUI</span>
+                                    <span class="edit-span">SEX</span>
+                                    <span class="edit-span">SAB</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="campoInfoEdit" style="margin-bottom: 5%" id="campoInfoEditButton">
+                            <button class="campoInfoEditButton" onclick="editarPerfil()">EDITAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fundoEscuro" id="fundoEscuro">
+                <div class="confirmDelete">
+                    <h3>DESEJA EXCLUIR A CONTA?</h3>
+                    <div class="confirm-delete-buttons">
+                        <button onclick="excluirPerfil()">SIM</button>
+                        <button onclick="naoExcluir()">NÃO</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pop-up" id="pop-up-confirm-edit">
+                <span style="font-size: large; font-weight: normal; letter-spacing: 0.1em; text-align: center;">CONFIRME AS ALTERAÇÕES</span>
+                <input type="password" id="pop-up-corfirm-edit-senha" class="pop-up-senha" placeholder="DIGITE SUA SENHA ANTIGA">
+                <h3 class="pop-up-titulo">CONFIRMA AS MODIFICAÇÕES?</h3>
+                <div class="pop-up-buttons">
+                   <button class="pop-up-button" onclick="confirmarEdicao()">SIM</button>
+                   <button class="pop-up-button" onclick="document.getElementById('pop-up-confirm-edit').style.display = 'none'">NÃO</button>
                 </div>
             </div>
         </div>
