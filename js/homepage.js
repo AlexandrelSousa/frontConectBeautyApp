@@ -161,8 +161,8 @@ function editarPerfilBox(){
             document.getElementById("edit-logradouro").value = data.logradouro;
             document.getElementById("edit-numero").value = data.numero;
             document.getElementById("edit-descricao").innerHTML = data.descricao;
-            document.getElementById("edit-hora-abre").value = data.horario_func[0];
-            document.getElementById("edit-hora-fecha").value = data.horario_func[1];
+            document.getElementById("edit-hora-abre").value = data.inicio_expediente;
+            document.getElementById("edit-hora-fecha").value = data.fim_expediente;
             data.dias_func[0] === true ? document.getElementById("edit-dia-dom").checked = true : document.getElementById("edit-dia-dom").checked = false;
             data.dias_func[1] === true ? document.getElementById("edit-dia-seg").checked = true : document.getElementById("edit-dia-seg").checked = false;
             data.dias_func[2] === true ? document.getElementById("edit-dia-ter").checked = true : document.getElementById("edit-dia-ter").checked = false;
@@ -238,7 +238,8 @@ function confirmarEdicao(){
             logradouro: document.getElementById("edit-logradouro").value,
             numero: document.getElementById("edit-numero").value,
             descricao: document.getElementById("edit-descricao").innerHTML,
-            horario_func: horario_func,
+            inicio_expediente: document.getElementById("edit-hora-abre").value,
+            fim_expediente: document.getElementById("edit-hora-fecha").value, 
             dias_func: dias_func_var
         };
     } else{

@@ -21,7 +21,6 @@ function previousForm3(){
 
 function registerEmpresa(){
     const dias = [document.getElementById("domingo").checked, document.getElementById("segunda").checked, document.getElementById("terça").checked, document.getElementById("quarta").checked, document.getElementById("quinta").checked, document.getElementById("sexta").checked, document.getElementById("sábado").checked]
-    const horarios = [document.getElementById("horaInicial").value, document.getElementById("horaFinal").value]
     const empresaData = {
       cnpj: document.getElementById("cnpj").value,
       senha: document.getElementById("senha").value,
@@ -33,7 +32,8 @@ function registerEmpresa(){
       numero: document.getElementById("numero").value,
       descricao: document.getElementById("descrição").value,
       classificacao: "0",
-      horario_func: horarios,
+      inicio_expediente: document.getElementById("horaInicial").value,
+      fim_expediente: document.getElementById("horaFinal").value,
       dias_func: dias
     };
     fetch('http://localhost:3030/empresa/cadastrar', {

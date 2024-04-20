@@ -22,6 +22,7 @@ function authenticateUser(){
   })
   .then(data => {
     console.log('Usuário autenticado com sucesso:', data);
+    console.log(data.acessToken)
     localStorage.setItem('token', data.acessToken);
     alert('Usuário autenticado com sucesso!');
     window.location.href = './html/homepage.html';
