@@ -3,6 +3,10 @@ const tokenParts = token.split('.');
 const payload = tokenParts[1];
 const decodedPayload = window.atob(payload);
 const tokenData = JSON.parse(decodedPayload);
+let procedimentosComID = {
+    nome: [],
+    id: []
+}
 let id = ""
 let url = ""
 let tipoDeUsuario = ""
@@ -35,7 +39,71 @@ fetch(url, {
         document.getElementById("perfil-box-titulo-h2").innerHTML = dataUser.nome;
         document.getElementById("perfil-box-info-cidade").innerHTML = dataUser.cidade;
         document.getElementById("perfil-box-info-endereco").innerHTML = dataUser.logradouro + " - " + dataUser.bairro + ", " + dataUser.numero
-        document.getElementById("perfil-box-info-funcionamento").innerHTML = "Aberto das " + dataUser.horario_func[0] + " as " + dataUser.horario_func[1]
+        document.getElementById("perfil-box-info-funcionamento").innerHTML = "Aberto das " + dataUser.inicio_expediente.substring(0, 5) + " as " + dataUser.fim_expediente.substring(0, 5)
+        document.getElementById("perfil-box-info-botaoExcluir").style.display = "none";
+        fetch('http://localhost:3030/procedimento', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token,
+        },
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar procedimentos');
+            }
+            return response.json();
+        })
+        .then(procedimentos => {
+            const divBox = document.getElementById("perfil-box-procedimentos")
+            const divProcedimentos = `
+                <div class="perfil-box-procedimentos-procedimentos">
+                    <div class="perfil-box-procedimentos-imagem" id="perfil-box-procedimentos-imagem">
+                        <img id="perfil-box-procedimentos-image-img" src="../assets/cilios-icon.svg" alt="" width="80%" height= "min-content">
+                    </div>
+                        <div class="perfil-box-procedimentos-informacoes">
+                            <div class="perfil-box-procedimentos-informacoes-titulo">
+                            <h3 id="perfil-box-procedimentos-titulo">Nome do Procedimento</h3>
+                        </div>
+                        <div class="perfil-box-procedimentos-informacoes-informacoes">
+                        <div class="perfil-box-procedimentos-informacoes-informacoes-dados">
+                            <p id="perfil-box-procedimentos-preço">R$ 00,00</p>
+                            <button onClick="abrirExcluirProced(this)" id="btn0">EXCLUIR</button>
+                        </div>
+                        <div class="perfil-box-procedimentos-informacoes-informacoes-editar" id="0" onclick="abrirFormEditProced(this)">
+                            <img src="../assets/edit-icon-cor2.png">
+                            <label for="">EDITAR</label>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            console.log("tamanho do array: " + procedimentos.length + "\nProcedimentos: " + procedimentos)
+            for(let i=0; i<procedimentos.length ; i++){
+                procedimentosComID.nome[i] = procedimentos[i].nome
+                procedimentosComID.id[i] = procedimentos[i].id_pro
+                divBox.innerHTML += divProcedimentos
+                document.getElementById("perfil-box-procedimentos-titulo").id = 'perfil-box-procedimentos-titulo' + i
+                document.getElementById("0").id = procedimentos[i].nome
+                document.getElementById("btn0").id = "btn" + procedimentos[i].nome
+                document.getElementById("perfil-box-procedimentos-preço").id = 'perfil-box-procedimentos-preço' + i
+                document.getElementById("perfil-box-procedimentos-titulo" + i).innerHTML = procedimentos[i].nome
+                document.getElementById("perfil-box-procedimentos-preço" + i).innerHTML = "R$ " + procedimentos[i].preco
+                if(procedimentos[i].categoria === "sobrancelha"){
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/sobrancelha-icon.svg"
+                } else if(procedimentos[i].categoria === "cilios"){
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/cilios-icon.svg"
+                } else if(procedimentos[i].categoria === "pés"){
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/pé-icon.svg"    
+                } else if(procedimentos[i].categoria === "mãos"){
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/mãos_icon.svg"    
+                } else if(procedimentos[i].categoria === "makeup"){
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/makeup_icon.svg"    
+                }else{
+                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/outros-icon.svg"    
+                }
+            }
+        }).catch(error => {
+            console.error('Erro:', error);
+        });
         let classificacao = (100 * dataUser.classificacao)/5;
         if(classificacao >= 20){
             document.getElementById("perfil-box-info-avaliacoes-estrelas-1").style.backgroundColor = "#f7abc2"
@@ -202,6 +270,7 @@ function editarPerfil(){
     }else{
         document.getElementById("pop-up-confirm-edit").style.display = "flex";
     }
+
 }
 function confirmarEdicao(){
     const userDataConfirm = {
@@ -282,3 +351,320 @@ function confirmarEdicao(){
     alert('Erro durante a autenticação: ' + error.message);
   });
 }
+
+function pesChange(){
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+
+    CheckboxOutros.checked = false;
+    CheckboxMãos.checked = false;
+    CheckboxSobrancelha.checked = false;
+    CheckboxCilios.checked = false;
+    CheckboxMakeup.checked = false;
+}
+
+function maosChange(){
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+
+    CheckboxOutros.checked = false;
+    CheckboxPés.checked = false;
+    CheckboxSobrancelha.checked = false;
+    CheckboxCilios.checked = false;
+    CheckboxMakeup.checked = false;
+}
+
+function sobrancelhaChange(){
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+
+    CheckboxOutros.checked = false;
+    CheckboxPés.checked = false;
+    CheckboxMãos.checked = false;
+    CheckboxCilios.checked = false;
+    CheckboxMakeup.checked = false;
+}
+
+function ciliosChange(){
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+
+    CheckboxOutros.checked = false;
+    CheckboxPés.checked = false;
+    CheckboxMãos.checked = false;
+    CheckboxSobrancelha.checked = false;
+    CheckboxMakeup.checked = false;
+}
+
+function makeupChange(){
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+    
+    CheckboxOutros.checked = false;
+    CheckboxPés.checked = false;
+    CheckboxMãos.checked = false;
+    CheckboxSobrancelha.checked = false;
+    CheckboxCilios.checked = false;
+}
+function outrosChange(){
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+
+    CheckboxMakeup.checked = false;
+    CheckboxPés.checked = false;
+    CheckboxMãos.checked = false;
+    CheckboxSobrancelha.checked = false;
+    CheckboxCilios.checked = false;
+}
+function abrirFormAddProced(){
+    var form = document.getElementById("perfil-box-procedimentos-adicionar-form")
+    if( form.style.display === "none"){
+        form.style.display = "block"
+    }else{
+        form.style.display = "none"
+    }
+    document.getElementById("categorias-button-adicionar").style.display = "inline-block"
+    document.getElementById("categorias-button-editar").style.display = "none"
+}
+function abrirFormEditProced(nome){
+    localStorage.setItem('nomeAntigo', nome.id)
+    var form = document.getElementById("perfil-box-procedimentos-adicionar-form")
+    if( form.style.display === "none"){
+        form.style.display = "block"
+    }else{
+        form.style.display = "none"
+    }
+    document.getElementById("categorias-button-adicionar").style.display = "none"
+    document.getElementById("categorias-button-editar").style.display = "inline-block"
+    fetch('http://localhost:3030/procedimento', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token,
+        },
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar procedimentos');
+            }
+            return response.json();
+        })
+        .then(procedimentos => {
+            let j
+            for(let i=0; i<procedimentos.length; i++){
+                if(procedimentos[i].nome === nome.id){
+                    j = i
+                }
+            }
+            document.getElementById("adicionar-novo-procedimento-nome").value = procedimentos[j].nome
+            document.getElementById("adicionar-novo-procedimento-descricao").innerHTML = procedimentos[j].descricao
+            document.getElementById("adicionar-novo-procedimento-duracao").value = procedimentos[j].duracao
+            document.getElementById("adicionar-novo-procedimento-preco").value = procedimentos[j].preco
+            if(procedimentos[j].categoria === "sobrancelha"){
+                document.getElementById("checkbox-sobrancelha").checked = true
+            } else if(procedimentos[j].categoria === "cilios"){
+                document.getElementById("checkbox-cilios").checked = true
+            } else if(procedimentos[j].categoria === "pés"){
+                document.getElementById("checkbox-pés").checked = true   
+            } else if(procedimentos[j].categoria === "mãos"){
+                document.getElementById("checkbox-mãos").checked = true  
+            } else if(procedimentos[j].categoria === "makeup"){
+                document.getElementById("checkbox-makeup").checked = true   
+            }else{
+                document.getElementById("checkbox-outros").checked = true   
+            }
+        }).catch(error => {
+            console.error('Erro:', error);
+        });
+}
+function adicionarProcedimento(){
+    var categoria
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+    if(CheckboxPés.checked === true){
+        categoria = "pés"
+    } else if(CheckboxMãos.checked === true){
+        categoria = "mãos"
+    } else if(CheckboxCilios.checked === true){
+        categoria = "cilios"
+    } else if(CheckboxMakeup.checked === true){
+        categoria = "makeup"
+    } else if(CheckboxSobrancelha.checked === true){
+        categoria = "sobrancelha"
+    }else if(CheckboxOutros.checked === true){
+        categoria = "outros"
+    }else{
+        alert("Selecione uma categoria")
+    }
+    procedimento = {
+        nome: document.getElementById("adicionar-novo-procedimento-nome").value,
+        descricao: document.getElementById("adicionar-novo-procedimento-descricao").value,
+        duracao: document.getElementById("adicionar-novo-procedimento-duracao").value,
+        preco: parseFloat(document.getElementById("adicionar-novo-procedimento-preco").value),
+        categoria: categoria
+    }
+    console.log(procedimento)
+    // Configurações da requisição
+    if(procedimento.nome === ""){
+        alert("Dê um nome para o procedimento")
+    } else if(procedimento.descricao === ""){
+        alert("Dê uma descrição para o procedimento")
+    } else if (procedimento.preco === ""){
+        alert("Dê um preço para o procedimento")
+    } else if(procedimento.duracao === ""){
+        alert("Dê uma duração para o procedimento")
+    }else{
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token
+            },
+            body: JSON.stringify(procedimento)
+        };
+        fetch("http://localhost:3030/procedimento", options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar recurso');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('procedimento criado com sucesso:', data);
+            window.location.reload(true)
+        })
+        .catch(error => {
+            console.error('Erro ao criar procedimento: ', error);
+        });
+    }
+}
+
+function editarProcedimento(){
+    var categoria
+    var CheckboxPés = document.getElementById("checkbox-pés");
+    var CheckboxMãos = document.getElementById("checkbox-mãos");
+    var CheckboxSobrancelha = document.getElementById("checkbox-sobrancelha");
+    var CheckboxCilios = document.getElementById("checkbox-cilios");
+    var CheckboxMakeup = document.getElementById("checkbox-makeup");
+    var CheckboxOutros = document.getElementById("checkbox-outros");
+    if(CheckboxPés.checked === true){
+        categoria = "pés"
+    } else if(CheckboxMãos.checked === true){
+        categoria = "mãos"
+    } else if(CheckboxCilios.checked === true){
+        categoria = "cilios"
+    } else if(CheckboxMakeup.checked === true){
+        categoria = "makeup"
+    } else if(CheckboxSobrancelha.checked === true){
+        categoria = "sobrancelha"
+    }else if(CheckboxOutros.checked === true){
+        categoria = "outros"
+    }else{
+        alert("Selecione uma categoria")
+    }
+    const procedimento = {
+        nome_antigo: localStorage.getItem('nomeAntigo'),
+        nome: document.getElementById("adicionar-novo-procedimento-nome").value,
+        descricao: document.getElementById("adicionar-novo-procedimento-descricao").innerHTML,
+        duracao: document.getElementById("adicionar-novo-procedimento-duracao").value,
+        preco: parseFloat(document.getElementById("adicionar-novo-procedimento-preco").value),
+        categoria: categoria
+    }
+    if(procedimento.nome === ""){
+        alert("Dê um nome para o procedimento")
+    } else if(procedimento.descricao === ""){
+        alert("Dê uma descrição para o procedimento")
+    } else if (procedimento.preco === ""){
+        alert("Dê um preço para o procedimento")
+    } else if(procedimento.duracao === ""){
+        alert("Dê uma duração para o procedimento")
+    }else{
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token
+            },
+            body: JSON.stringify(procedimento)
+        };
+        fetch("http://localhost:3030/procedimento", options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar recurso');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('procedimento editado com sucesso:', data);
+            window.location.reload(true)
+        })
+        .catch(error => {
+            console.error('Erro ao editar procedimento: ', error);
+        });
+    }
+
+}
+function abrirExcluirProced(nome){
+    let nome2 = nome.id.replace("btn", "")
+    localStorage.setItem('nome', nome2)
+    document.getElementById("fundoEscuro3").style.display = "flex"
+}
+function naoExcluirProc(){
+    document.getElementById("fundoEscuro3").style.display = "none"
+}
+function excluirProcedimento(){
+    let idResgatado
+    for(let i=0; i<procedimentosComID.nome.length; i++){
+        if(procedimentosComID.nome[i] == localStorage.getItem('nome')){
+            idResgatado = procedimentosComID.id[i]
+        }
+    }
+    const nomeProc = {
+        nome: localStorage.getItem('nome'),
+        id_pro: idResgatado
+    }
+    console.log(nomeProc)
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token
+        },
+        body: JSON.stringify(nomeProc)
+    };
+    fetch("http://localhost:3030/procedimento", options)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        window.location.reload(true);
+    })
+    .catch(error => console.error('Erro:', error));
+}
+$(document).ready(function(){
+    $('#adicionar-novo-procedimento-duracao').mask('99:99:99');
+});
+
+$(document).ready(function(){
+    $('#adicionar-novo-procedimento-preco').mask('999.99', {reverse: true});
+});

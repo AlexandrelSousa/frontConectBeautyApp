@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Conect Beauty</title>
         <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>  
         <script src="../js/homepage.js"></script>
         <link rel="shortcut icon" type="imagex/png" href="../assets/logo3.ico">
     <body>
@@ -48,7 +51,7 @@
                                         <div class="perfil-box-info-avaliacoes-numero"><p>(0.0)</p></div>
                                         <div class="perfil-box-info-avaliacoes-quantidade-reviews"><p>0 reviews</p></div>
                                     </div>
-                                    <div class="perfil-box-info-botaoExcluir">
+                                    <div id="perfil-box-info-botaoExcluir" class="perfil-box-info-botaoExcluir">
                                         <button class="perfil-box-informações-delete" style="height: 50%;" onclick="excluirConfirm()">EXCLUIR CONTA</button>
                                     </div>
                                 </div>
@@ -59,7 +62,45 @@
                                         <li id="button-informacoes"><p id="button-informacoes-p" onclick="buttonInformacoes()">Informações</p><div class="perfil-box-menu-point" id="perfil-box-menu-point-informacoes" style="background-color: #fff"></div></li>
                                     </ul>
                                 </div>
-                                <div class="perfil-box-procedimentos" id="perfil-box-procedimentos"></div>
+                                <div class="perfil-box-procedimentos" id="perfil-box-procedimentos">
+                                    <div class="perfil-box-procedimentos-adicionar">
+                                        <button class="perfil-box-procedimentos-adicionar-button" onclick="abrirFormAddProced()">+</button>
+                                    </div>
+                                    <div class="perfil-box-procedimentos-adicionar-form" id="perfil-box-procedimentos-adicionar-form" style="display: none;">
+                                        <ul>
+                                            <li><h3>ADICIONAR NOVO PROCEDIMENTO</h3></li>
+                                            <li><input type="text" name="nome do procedimento" id="adicionar-novo-procedimento-nome" class="adicionar-novo-procedimento-nome" placeholder="NOME"><input type="number" placeholder="R$ 00,00" class="adicionar-novo-procedimento-preco" id="adicionar-novo-procedimento-preco"></li>
+                                            <li><input type="text" placeholder="DURAÇÃO - HH:MM:SS" class="adicionar-novo-procedimento-duracao" id="adicionar-novo-procedimento-duracao"></li>
+                                            <li class="adicionar-novo-procedimento-menu">
+                                                <textarea cols="30" rows="5" class="adicionar-novo-procedimento-descricao" placeholder="DESCRIÇÃO" id="adicionar-novo-procedimento-descricao"></textarea>
+                                                <div class="adicionar-novo-procedimento-categoria">
+                                                    <label for="" class="adicionar-novo-procedimento-categoria-label">categoria</label>
+                                                    <div class="adicionar-novo-procedimento-categorias">
+                                                        <div class="categorias-linha1">
+                                                            <div class="categorias-coluna1">
+                                                                <label for="" class="categorias-label"><input onchange="makeupChange()" id="checkbox-makeup" class="categorias-checkbox" type="checkbox" name="" id="">makeup</label>
+                                                                <label for="" class="categorias-label"><input onchange="ciliosChange()" id="checkbox-cilios" class="categorias-checkbox" type="checkbox" name="" id="">cílios</label>
+                                                            </div>
+                                                            <div class="categorias-coluna1">
+                                                                <label for="" class="categorias-label"><input onchange="maosChange()" id="checkbox-mãos" type="checkbox" class="categorias-checkbox">mãos</label>
+                                                                <label for="" class="categorias-label"><input onchange="pesChange()" id="checkbox-pés" type="checkbox"class="categorias-checkbox">pés</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="categorias-linha2">
+                                                            <div class="categorias-coluna1">
+                                                                <label for="" class="categorias-label oie"><input onchange="sobrancelhaChange()" id="checkbox-sobrancelha" class="categorias-checkbox" type="checkbox" name="" id="">sobrancelha</label>
+                                                            </div>
+                                                            <div class="categorias-coluna1">
+                                                                <label for="" class="categorias-label"><input onchange="outrosChange()" id="checkbox-outros" type="checkbox" class="categorias-checkbox">outros</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li><button class="categorias-button" id="categorias-button-adicionar" onclick="adicionarProcedimento()" style="display: none;">ADICIONAR</button><button style="display: none;" id="categorias-button-editar" class="categorias-button" onclick="editarProcedimento()">EDITAR</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="perfil-box-avaliações" id="perfil-box-avaliações" style="display: none"></div>
                                 <div class="perfil-box-informações" id="perfil-box-informações" style="display: none">
                                     <div class="perfil-box-informações-relatorio"></div>
@@ -168,6 +209,15 @@
                 <div class="pop-up-buttons">
                    <button class="pop-up-button" onclick="confirmarEdicao()">SIM</button>
                    <button class="pop-up-button" onclick="document.getElementById('pop-up-confirm-edit').style.display = 'none'">NÃO</button>
+                </div>
+            </div>
+            <div class="fundoEscuro" id="fundoEscuro3">
+                <div class="confirmDelete">
+                    <h3>DESEJA EXCLUIR O PROCEDIMENTO?</h3>
+                    <div class="confirm-delete-buttons">
+                        <button onclick="excluirProcedimento()">SIM</button>
+                        <button onclick="naoExcluirProc()">NÃO</button>
+                    </div>
                 </div>
             </div>
         </div>
