@@ -87,18 +87,21 @@ fetch(url, {
                 document.getElementById("perfil-box-procedimentos-preço").id = 'perfil-box-procedimentos-preço' + i
                 document.getElementById("perfil-box-procedimentos-titulo" + i).innerHTML = procedimentos[i].nome
                 document.getElementById("perfil-box-procedimentos-preço" + i).innerHTML = "R$ " + procedimentos[i].preco
+                
+                document.getElementById("perfil-box-procedimentos-image-img").id = 'perfil-box-procedimentos-image-img' + i
+                
                 if(procedimentos[i].categoria === "sobrancelha"){
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/sobrancelha-icon.svg"
+                    document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/sobrancelha-icon.svg"
                 } else if(procedimentos[i].categoria === "cilios"){
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/cilios-icon.svg"
+                    document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/cilios-icon.svg"
                 } else if(procedimentos[i].categoria === "pés"){
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/pé-icon.svg"    
+                    document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/pé-icon.svg"    
                 } else if(procedimentos[i].categoria === "mãos"){
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/mãos_icon.svg"    
+                    document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/mãos_icon.svg"    
                 } else if(procedimentos[i].categoria === "makeup"){
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/makeup_icon.svg"    
+                    document.getElementById("perfil-box-procedimentos-image-img"  + i).src = "../assets/makeup_icon.svg"    
                 }else{
-                    document.getElementById("perfil-box-procedimentos-image-img").src = "../assets/outros-icon.svg"    
+                    document.getElementById("perfil-box-procedimentos-image-img"  + i).src = "../assets/outros-icon.svg"    
                 }
             }
         }).catch(error => {
@@ -668,3 +671,476 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('#adicionar-novo-procedimento-preco').mask('999.99', {reverse: true});
 });
+
+
+function barraCilios(){
+    if(document.getElementById("categorias-barra-cilios").style.display == "block"){
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "block"
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        document.getElementById("categorias-barra-outros").style.display = "none"
+    
+        const filtro = {
+            categoria: "cilios"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                while (feedEmpresas.firstChild) {
+                    feedEmpresas.removeChild(feedEmpresas.firstChild);
+                }
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+function barraMão(){
+    if(document.getElementById("categorias-barra-mão").style.display == "block"){
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        document.getElementById("categorias-barra-mão").style.display = "block"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        document.getElementById("categorias-barra-outros").style.display = "none"
+        
+        const filtro = {
+            categoria: "mãos"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                while (feedEmpresas.firstChild) {
+                    feedEmpresas.removeChild(feedEmpresas.firstChild);
+                }
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+function barraSobrancelha(){
+    if(document.getElementById("categorias-barra-sobrancelha").style.display == "block"){
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "block"
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        document.getElementById("categorias-barra-outros").style.display = "none"
+    
+        const filtro = {
+            categoria: "sobrancelha"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                while (feedEmpresas.firstChild) {
+                    feedEmpresas.removeChild(feedEmpresas.firstChild);
+                }
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+function barraMakeup(){
+    if(document.getElementById("categorias-barra-makeup").style.display == "block"){
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        document.getElementById("categorias-barra-makeup").style.display = "block"
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        document.getElementById("categorias-barra-outros").style.display = "none"
+    
+        const filtro = {
+            categoria: "makeup"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                while (feedEmpresas.firstChild) {
+                    feedEmpresas.removeChild(feedEmpresas.firstChild);
+                }
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+function barraPé(){
+    if(document.getElementById("categorias-barra-pé").style.display == "block"){
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        document.getElementById("categorias-barra-pé").style.display = "block"
+        document.getElementById("categorias-barra-outros").style.display = "none"
+    
+        const filtro = {
+            categoria: "pés"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                while (feedEmpresas.firstChild) {
+                    feedEmpresas.removeChild(feedEmpresas.firstChild);
+                }
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+
+function barraOutros(){
+    if(document.getElementById("categorias-barra-outros").style.display == "block"){
+        document.getElementById("categorias-barra-outros").style.display = "none"
+        var feedEmpresas = document.getElementById("feed-empresas")
+        while (feedEmpresas.firstChild) {
+            feedEmpresas.removeChild(feedEmpresas.firstChild);
+        }
+        listarTodos()
+    }else{
+        document.getElementById("categorias-barra-cilios").style.display = "none"
+        document.getElementById("categorias-barra-mão").style.display = "none"
+        document.getElementById("categorias-barra-sobrancelha").style.display = "none"
+        document.getElementById("categorias-barra-makeup").style.display = "none"
+        document.getElementById("categorias-barra-pé").style.display = "none"
+        document.getElementById("categorias-barra-outros").style.display = "block"
+    
+        const filtro = {
+            categoria: "outros"
+        };
+        
+        // Convertendo os parâmetros de filtro em uma string de consulta
+        const queryString = new URLSearchParams(filtro).toString();
+        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        
+        fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao aplicar o filtro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                var feedEmpresas = document.getElementById("feed-empresas")
+                feedEmpresas.dataset.id = data.length
+                let k = 0
+    
+                adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+                for(let i=0; i<data.length; i++){
+                    for(let j=0; j<3; j++){
+                        if(k!=data.length){
+                            document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                            document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                            document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                        }else{
+                            break;
+                        }
+                        k++
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao aplicar o filtro: ', error);
+            });
+    }
+}
+
+function listarTodos(){
+    $(document).ready(function(){
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        fetch("http://localhost:3030/empresa/todas", options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao consultar recurso');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('empresas carregadas com sucesso:', data);
+            document.getElementById("feed-empresas").dataset.id = data.length
+            let k = 0
+            adicionarDivDinamica(Math.ceil(data.length / 3), data.length)
+            for(let i=0; i<data.length; i++){
+                for(let j=0; j<3; j++){
+                    if(k!=data.length){
+                        document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
+                        document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
+                        document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                    }else{
+                        break;
+                    }
+                    k++
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao consultar empresas: ', error);
+        });
+    });
+}
+
+function adicionarDivDinamica(numLinhas, numColum){
+    let i
+    let j
+    let l = 0
+    
+    const feedLinhas = `
+    <div class="feed-empresas-linha" id="feed-empresas-linha"></div>
+    `
+    const feedColuna = `
+    <div class="feed-empresas-coluna" id="feed-empresas-coluna">
+        <div class="feed-empresas-coluna-imagem" id="feed-empresas-coluna-imagem"></div>
+        <label class="feed-empresas-coluna-nome" id="feed-empresas-coluna-nome"></label>
+        <textarea class="feed-empresas-coluna-descricao" id="feed-empresas-coluna-descricao" rows="3" cols="10" readonly maxlength="20"></textarea>
+    </div>
+    `
+    for (i=0; i<numLinhas; i++){
+        document.getElementById("feed-empresas").innerHTML += feedLinhas
+        document.getElementById("feed-empresas-linha").id = "feed-empresas-linha-" + i
+        for(j=0; j<3; j++){
+            if(l != numColum){
+                document.getElementById("feed-empresas-linha-" + i).innerHTML += feedColuna
+                document.getElementById("feed-empresas-coluna").id = "feed-empresas-linha-" + i + "-coluna-" + j
+                //document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[l].cnpj
+                document.getElementById("feed-empresas-coluna-imagem").id = "feed-empresas-coluna-imagem-linha-" + i + "-coluna-" + j
+                document.getElementById("feed-empresas-coluna-nome").id = "feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j
+                document.getElementById("feed-empresas-coluna-descricao").id = "feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j
+                //document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[l].nome
+                //document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[l].descricao
+            }else{
+                break;
+            }
+            l++
+        }
+    }
+}
+
+listarTodos();

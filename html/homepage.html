@@ -23,7 +23,54 @@
                         <img src="../assets/logo3.ico" alt="">
                     </header>
                     <main>
-                        <div class="feed" id="feed">FEED</div>
+                        <div class="feed" id="feed">
+                            <div class="feed-categorias">
+                                <div class="feed-categorias-barra" onclick="barraCilios()">
+                                    <div class="categorias-barra" id="categorias-barra-cilios"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/cilios-icon.svg" alt="">
+                                        <p>cílios</p>
+                                    </div>
+                                </div>
+                                <div class="feed-categorias-barra" onclick="barraMakeup()">
+                                    <div class="categorias-barra" id="categorias-barra-makeup"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/makeup_icon.svg" alt="">
+                                        <p>makeup</p>
+                                    </div>
+                                </div>
+                                <div class="feed-categorias-barra" onclick="barraPé()">
+                                    <div class="categorias-barra" id="categorias-barra-pé"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/pé-icon.svg" alt="">
+                                        <p>pés</p>
+                                    </div>
+                                </div>
+                                <div class="feed-categorias-barra" onclick="barraMão()">
+                                    <div class="categorias-barra" id="categorias-barra-mão"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/mãos_icon.svg" alt="">
+                                        <p>mãos</p>
+                                    </div>
+                                </div>
+                                <div class="feed-categorias-barra" onclick="barraSobrancelha()">
+                                    <div class="categorias-barra" id="categorias-barra-sobrancelha"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/sobrancelha-icon.svg" alt="">
+                                        <p>sobrancelha</p>
+                                    </div>
+                                </div>
+                                <div class="feed-categorias-barra" style="margin-right: 2%;" onclick="barraOutros()">
+                                    <div class="categorias-barra" id="categorias-barra-outros"></div>
+                                    <div class="categorias-imagem">
+                                        <img src="../assets/outros-icon.svg" alt="">
+                                        <p>outros</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feed-empresas" id="feed-empresas">
+                            </div>
+                        </div>
                         <div class="perfil" id="perfil">
                             <div class="perfil-box">
                                 <div class="perfil-box-titulo">
@@ -160,7 +207,7 @@
                             <input type="number" name="" class="edit-field" id="edit-numero" placeholder="NÚMERO">
                         </div>
                         <div class="campoInfoEdit ConfirmEdit-descricao" id="ConfirmEdit-descricao">
-                            <textarea type="text" name="" class="edit-descricao" id="edit-descricao" placeholder="DESCRIÇÃO"></textarea>
+                            <textarea type="text" name="" class="edit-descricao" id="edit-descricao" placeholder="DESCRIÇÃO" maxlength="20"></textarea>
                         </div>
                         <div class="campoInfoEdit ConfirmEdit-horarioFunc" id="ConfirmEdit-horarioFunc">
                             <label for="">DAS</label><input type="time" class="input-edit-hora" name="" id="edit-hora-abre"><label for="">ÀS</label><input type="time" name="" id="edit-hora-fecha" class="input-edit-hora">
