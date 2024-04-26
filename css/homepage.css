@@ -915,8 +915,35 @@ header img{
 .feed-empresas-coluna-descricao::-webkit-scrollbar{
     display: none;
 }
+
+.perfil-empresa{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+.imagem-empresa{
+    width: 100%;
+    height: 30%;
+    background-color: #f5c2c7;
+}
+.conteudo-empresa{
+    width: 100%;
+    height: 70%;
+    background-color: aqua;
+}
 /*feed-empresas-linha">
 <div class="feed-empresas-coluna">
 <div class="feed-empresas-coluna-imagem"></div>
 <div class="feed-empresas-coluna-nome"></div>
 <div class="feed-empresas-coluna-descricao"></div>*/
+
+
+/*      ---------INFORMAÇÕES DA PÁGINA DA EMPRESA------------*/
+
+.perfil-empresa{
+    width: 100%;
+    height: 100%;
+    display: none;
+}

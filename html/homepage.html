@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="perfil-box-procedimentos" id="perfil-box-procedimentos">
                                     <div class="perfil-box-procedimentos-adicionar">
-                                        <button class="perfil-box-procedimentos-adicionar-button" onclick="abrirFormAddProced()">+</button>
+                                        <button class="perfil-box-procedimentos-adicionar-button" id="perfil-box-procedimentos-adicionar-button" onclick="abrirFormAddProced()">+</button>
                                     </div>
                                     <div class="perfil-box-procedimentos-adicionar-form" id="perfil-box-procedimentos-adicionar-form" style="display: none;">
                                         <ul>
@@ -152,6 +152,48 @@
                                 <div class="perfil-box-informações" id="perfil-box-informações" style="display: none">
                                     <div class="perfil-box-informações-relatorio"></div>
                                     <div class="perfil-box-informações-delete" onclick="excluirConfirm()">EXCLUIR PERFIL</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="perfil-empresa" id="perfil-empresa">
+                            <div class="perfil-box">
+                                <div class="perfil-box-titulo">
+                                    <h2 class="perfil-box-titulo-h2" id="empreendedora-box-titulo-h2">Nome da empresa</h2>
+                                </div>
+                                <div class="perfil-box-info">
+                                    <div class="perfil-box-info-endereco">
+                                        <p id="empreendedora-box-info-cidade">Cidade-CC,</p>
+                                    </div>
+                                    <div class="perfil-box-info-endereco">
+                                        <p id="empreendedora-box-info-endereco">Tv. Travessa Atravessada - Bairro 000</p>
+                                    </div>
+                                    <div class="perfil-box-info-funcionamento">
+                                        <p id="empreendedora-box-info-funcionamento">Aberto das 7:00h as 18:00h</p>
+                                    </div>
+                                    <div class="perfil-box-info-avaliacoes" id="empreendedora-box-info-avaliacoes">
+                                        <div class="perfil-box-info-avaliacoes-estrelas">
+                                            <div class="perfil-box-info-avaliacoes-estrelas-1" id="perfil-box-info-avaliacoes-estrelas-1"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-2" id="perfil-box-info-avaliacoes-estrelas-2"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-3" id="perfil-box-info-avaliacoes-estrelas-3"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-4" id="perfil-box-info-avaliacoes-estrelas-4"></div>
+                                            <div class="perfil-box-info-avaliacoes-estrelas-5" id="perfil-box-info-avaliacoes-estrelas-5"></div>
+                                        </div>
+                                        <div class="perfil-box-info-avaliacoes-numero"><p>(0.0)</p></div>
+                                        <div class="perfil-box-info-avaliacoes-quantidade-reviews"><p>0 reviews</p></div>
+                                    </div>
+                                </div>
+                                <div class="perfil-box-menu">
+                                    <ul>
+                                        <li id="button-procedimentos"><p id="button-procedimentos-p" onclick="buttonProcedimentosEmpresa()">Procedimentos</p><div class="perfil-box-menu-point" id="empreendedora-box-menu-point-procedimentos"></div></li>
+                                        <li id="button-avaliacoes"><p id="button-avaliacoes-p" onclick="buttonAvaliacoesEmpresa()">Avaliações</p><div class="perfil-box-menu-point" id="empreendedora-box-menu-point-avaliacoes" style="background-color: #fff"></div></li>
+                                        <li id="button-informacoes"><p id="button-informacoes-p" onclick="buttonInformacoesEmpresa()">Informações</p><div class="perfil-box-menu-point" id="empreendedora-box-menu-point-informacoes" style="background-color: #fff"></div></li>
+                                    </ul>
+                                </div>
+                                <div class="perfil-box-procedimentos" id="empreendedora-box-procedimentos">
+                                </div>
+                                <div class="perfil-box-avaliações" id="empreendedora-box-avaliações" style="display: none"></div>
+                                <div class="perfil-box-informações" id="empreendedora-box-informações" style="display: none">
+                                    <div class="perfil-box-informações-relatorio"></div>
                                 </div>
                             </div>
                         </div>
