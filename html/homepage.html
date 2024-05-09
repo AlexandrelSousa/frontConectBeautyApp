@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Conect Beauty</title>
         <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>  
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>  
@@ -110,7 +111,7 @@
                                     </ul>
                                 </div>
                                 <div class="perfil-box-procedimentos" id="perfil-box-procedimentos">
-                                    <div class="perfil-box-procedimentos-adicionar">
+                                    <div class="perfil-box-procedimentos-adicionar" id="perfil-box-procedimentos-adicionar">
                                         <button class="perfil-box-procedimentos-adicionar-button" id="perfil-box-procedimentos-adicionar-button" onclick="abrirFormAddProced()">+</button>
                                     </div>
                                     <div class="perfil-box-procedimentos-adicionar-form" id="perfil-box-procedimentos-adicionar-form" style="display: none;">
@@ -156,7 +157,7 @@
                             </div>
                         </div>
                         <div class="perfil-empresa" id="perfil-empresa">
-                            <div class="perfil-box">
+                            <div class="perfil-box" id="perfil-box">
                                 <div class="perfil-box-titulo">
                                     <h2 class="perfil-box-titulo-h2" id="empreendedora-box-titulo-h2">Nome da empresa</h2>
                                 </div>
@@ -195,6 +196,12 @@
                                 <div class="perfil-box-informações" id="empreendedora-box-informações" style="display: none">
                                     <div class="perfil-box-informações-relatorio"></div>
                                 </div>
+                            </div>
+                            <div class="wrapper" id="wrapper" style="display: none;">
+                                <span>Agendamento</span>
+                                <input type="date" class="agendamento-data" id="agendamento-data">
+                                <input type="time" class="agendamento-hora" id="agendamento-hora">
+                                <button class="campoInfoEditButton" style="height: 7%;" id="agendamento-button" onclick="agendar(this)">AGENDAR</button>
                             </div>
                         </div>
                     </main>

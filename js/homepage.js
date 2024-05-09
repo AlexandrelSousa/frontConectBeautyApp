@@ -154,6 +154,86 @@ function perfilButton() {
     document.getElementById("perfil").style.display = "block"
     document.getElementById("feed").style.display = "none"
     document.getElementById("perfil-empresa").style.display = "none"
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token
+        }
+    };
+    fetch("http://localhost:3030/agendamento", options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao criar recurso');
+            }
+            return response.json();
+        })
+        .then(agendamento => {
+            console.log(agendamento)
+            box = document.getElementById("perfil-box-procedimentos")
+            box.innerHTML = ''
+            console.log(agendamento.length)
+            for(let i=0; i<agendamento.length;i++){
+                box.innerHTML += `<div class="box-agendamento">
+                <div class="excluirAgd"></div>
+                <div class="tag"></div>
+                <div id="agendamento-infos" class="agendamento-infos">
+                    <div id="agendamento-titulo" class="agendamento-titulo">
+                    </div>
+                    <div id="agendamento-empresa" class="agendamento-info"></div>
+                    <div id="agendamento-dia" class="agendamento-info"></div>
+                    <div id="agendamento-hora" class="agendamento-info"></div>
+                </div>
+                </div>`
+                document.getElementById("agendamento-titulo").id += "-" + i
+                document.getElementById("agendamento-infos").id += "-" + i
+                document.getElementById("agendamento-empresa").id += "-" + i
+                document.getElementById("agendamento-dia").id += "-" + i
+                document.getElementById("agendamento-hora").id += "-" + i
+
+                
+                document.getElementById("agendamento-dia-" + i).innerHTML = "No dia: " + agendamento[i].data.substring(0,10)
+                document.getElementById("agendamento-hora-" + i).innerHTML = "As: " + agendamento[i].hora_inicio.substring(0,5)
+                
+                const options2 = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': token
+                    }
+                }
+                fetch("http://localhost:3030/empresa/" + agendamento[i].id_emp, options2)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao consular recurso');
+                    }
+                    return response.json();
+                })
+                .then(empresa => {
+                    document.getElementById("agendamento-empresa-" + i).innerHTML = "Na empresa: " + empresa.nome
+                })
+                .catch(error => {
+                    console.error('Erro ao consultar empresa ', error);
+                });
+                fetch("http://localhost:3030/procedimento/unico/" + agendamento[i].id_pro, options2)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao consular recurso');
+                    }
+                    return response.json();
+                })
+                .then(procedimento => {
+                    console.log(procedimento)
+                    document.getElementById("agendamento-titulo-" + i).innerHTML = procedimento.nome
+                })
+                .catch(error => {
+                    console.error('Erro ao consultar empresa ', error);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao consultar agendamento: ', error);
+        });
 }
 function feedButton() {
     document.getElementById("perfil").style.display = "none"
@@ -164,6 +244,8 @@ function empresaButton(empresa) {
     document.getElementById("perfil").style.display = "none"
     document.getElementById("feed").style.display = "none"
     document.getElementById("perfil-empresa").style.display = "block"
+    document.getElementById("perfil-box").style.display = "flex"
+    document.getElementById("wrapper").style.display = "none"
 
     fetch('http://localhost:3030/empresa/' + empresa.dataset.id, {
         method: 'GET',
@@ -177,14 +259,14 @@ function empresaButton(empresa) {
         }
         return response.json();
     })
-    .then(empreendedora => {
-        document.getElementById("empreendedora-box-titulo-h2").innerHTML = empreendedora.nome
-        document.getElementById("empreendedora-box-info-cidade").innerHTML = empreendedora.cidade
-        document.getElementById("empreendedora-box-info-endereco").innerHTML = empreendedora.logradouro + " - " + empreendedora.bairro + ", " + empreendedora.numero
-        document.getElementById("empreendedora-box-info-funcionamento").innerHTML = "Aberto das " + empreendedora.inicio_expediente.substring(0, 5) + " as " + empreendedora.fim_expediente.substring(0, 5)
-    }).catch(error => {
-        console.error('Erro:', error);
-    });
+        .then(empreendedora => {
+            document.getElementById("empreendedora-box-titulo-h2").innerHTML = empreendedora.nome
+            document.getElementById("empreendedora-box-info-cidade").innerHTML = empreendedora.cidade
+            document.getElementById("empreendedora-box-info-endereco").innerHTML = empreendedora.logradouro + " - " + empreendedora.bairro + ", " + empreendedora.numero
+            document.getElementById("empreendedora-box-info-funcionamento").innerHTML = "Aberto das " + empreendedora.inicio_expediente.substring(0, 5) + " as " + empreendedora.fim_expediente.substring(0, 5)
+        }).catch(error => {
+            console.error('Erro:', error);
+        });
     fetch('http://localhost:3030/procedimento/' + empresa.dataset.id, {
         method: 'GET',
         headers: {
@@ -197,10 +279,10 @@ function empresaButton(empresa) {
         }
         return response.json();
     })
-    .then(procedimentos => {
-        console.log(procedimentos)
-        var procedimentosEmpreendedora = document.getElementById("empreendedora-box-procedimentos")
-        var divProcedimentos = `
+        .then(procedimentos => {
+            console.log(procedimentos)
+            var procedimentosEmpreendedora = document.getElementById("empreendedora-box-procedimentos")
+            var divProcedimentos = `
                 <div class="perfil-box-procedimentos-procedimentos">
                     <div class="perfil-box-procedimentos-imagem" id="perfil-box-procedimentos-imagem">
                         <img id="empreendedora-box-procedimentos-image-img" src="../assets/cilios-icon.svg" alt="" width="80%" height= "min-content">
@@ -213,44 +295,48 @@ function empresaButton(empresa) {
                         <div class="perfil-box-procedimentos-informacoes-informacoes-dados" style="width: 57%;">
                             <p id="empreendedora-box-procedimentos-preço">R$ 00,00</p>
                         </div>
-                        <div class="perfil-box-procedimentos-informacoes-informacoes-editar" id="0" style="width: 40%;" onclick="abrirFormEditProced(this)">
+                        <div class="perfil-box-procedimentos-informacoes-informacoes-editar" id="0" style="width: 40%;" onclick="abrirFormAgendar(this)">
                             <img src="../assets/edit-icon-cor2.png" style="width: 25%;">
                             <label for="">AGENDAR</label>
                         </div>
                     </div>
                 </div>
             </div>`
-        for(let i=0; i<procedimentos.length; i++){
-            //adicionando dinamicamente as novas divs
-            procedimentosEmpreendedora.innerHTML += divProcedimentos
+            procedimentosEmpreendedora.innerHTML = ''
+            for (let i = 0; i < procedimentos.length; i++) {
+                //adicionando dinamicamente as novas divs
+                procedimentosEmpreendedora.innerHTML += divProcedimentos
 
-            //setando para cada div um id único
-            document.getElementById("empreendedora-box-procedimentos-image-img").id = "empreendedora-box-procedimentos-image-img-" + i
-            document.getElementById("empreendedora-box-procedimentos-titulo").id = "empreendedora-box-procedimentos-titulo-" + i
-            document.getElementById("empreendedora-box-procedimentos-preço").id = "empreendedora-box-procedimentos-preço-" + i
-            document.getElementById("0").id = procedimentos[i].nome
+                //setando para cada div um id único
+                document.getElementById("empreendedora-box-procedimentos-image-img").id = "empreendedora-box-procedimentos-image-img-" + i
+                document.getElementById("empreendedora-box-procedimentos-titulo").id = "empreendedora-box-procedimentos-titulo-" + i
+                document.getElementById("empreendedora-box-procedimentos-preço").id = "empreendedora-box-procedimentos-preço-" + i
+                document.getElementById("0").dataset.idpro = procedimentos[i].id_pro
+                document.getElementById("0").dataset.duracao = procedimentos[i].duracao
 
-            //atribuindo os valores respectivos para cada div
-            if (procedimentos[i].categoria === "sobrancelha") {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/sobrancelha-icon.svg"
-            } else if (procedimentos[i].categoria === "cilios") {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/cilios-icon.svg"
-            } else if (procedimentos[i].categoria === "pés") {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/pé-icon.svg"
-            } else if (procedimentos[i].categoria === "mãos") {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/mãos_icon.svg"
-            } else if (procedimentos[i].categoria === "makeup") {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/makeup_icon.svg"
-            } else {
-                document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/outros-icon.svg"
+                document.getElementById("0").id = empresa.dataset.id
+
+                //atribuindo os valores respectivos para cada div
+                if (procedimentos[i].categoria === "sobrancelha") {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/sobrancelha-icon.svg"
+                } else if (procedimentos[i].categoria === "cilios") {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/cilios-icon.svg"
+                } else if (procedimentos[i].categoria === "pés") {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/pé-icon.svg"
+                } else if (procedimentos[i].categoria === "mãos") {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/mãos_icon.svg"
+                } else if (procedimentos[i].categoria === "makeup") {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/makeup_icon.svg"
+                } else {
+                    document.getElementById("empreendedora-box-procedimentos-image-img-" + i).src = "../assets/outros-icon.svg"
+                }
+                document.getElementById("empreendedora-box-procedimentos-titulo-" + i).innerHTML = procedimentos[i].nome
+                document.getElementById("empreendedora-box-procedimentos-preço-" + i).innerHTML = "R$ " + procedimentos[i].preco
             }
-            document.getElementById("empreendedora-box-procedimentos-titulo-" + i).innerHTML = procedimentos[i].nome
-            document.getElementById("empreendedora-box-procedimentos-preço-" + i).innerHTML = "R$ " + procedimentos[i].preco
-        }
-    }).catch(error => {
-        console.error('Erro:', error);
-    });
-    
+        }).catch(error => {
+            console.error('Erro:', error);
+        });
+
 }
 
 function excluirPerfil() {
@@ -1266,4 +1352,106 @@ function buttonInformacoesEmpresa() {
     document.getElementById("empreendedora-box-procedimentos").style.display = "none"
     document.getElementById("empreendedora-box-avaliações").style.display = "none"
     document.getElementById("empreendedora-box-informações").style.display = "block"
+}
+
+function abrirFormAgendar(procedimento) {
+    document.getElementById("perfil-box").style.display = "none"
+    document.getElementById("wrapper").style.display = "flex"
+    console.log(procedimento.dataset.idpro + "\n" + procedimento.id)
+    document.getElementById("agendamento-button").dataset.idpro = procedimento.dataset.idpro
+    document.getElementById("agendamento-button").dataset.cnpj = procedimento.id
+    document.getElementById("agendamento-button").dataset.duracao = procedimento.dataset.duracao
+}
+function agendar(infos) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token
+        }
+    };
+    fetch("http://localhost:3030/empresa/" + infos.dataset.cnpj, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar recurso');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+            var date = document.getElementById("agendamento-data")
+            var date2 = new Date(date.value);
+            var diaDaSemana = date2.getDay()
+            var hora = document.getElementById("agendamento-hora")
+            console.log(date.value + "\n" + hora.value)
+            if (diaDaSemana == 6) {
+                diaDaSemana = 0
+            } else {
+                diaDaSemana++
+            }
+            if (data.dias_func[diaDaSemana]) {
+                if (horarioEstaNoIntervalo(hora.value, data.inicio_expediente, data.fim_expediente)) {
+                    var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss'); // Horário 1: 08:30:00
+                    var hora2 = moment(hora.value, 'HH:mm'); // Horário 2: 02:45:00
+                    var somaTotal = moment({}).startOf('day')
+                        .add(hora1.hours(), 'hours').add(hora2.hours(), 'hours')
+                        .add(hora1.minutes(), 'minutes').add(hora2.minutes(), 'minutes');
+                    var horaFormatada = somaTotal.format('HH:mm:ss');
+                    const agendamentoData = {
+                        id_pro: document.getElementById("agendamento-button").dataset.idpro,
+                        cnpj: document.getElementById("agendamento-button").dataset.cnpj,
+                        data: date.value + "T00:00:00-03:00",
+                        hora_inicio: hora.value + ":00-03:00",
+                        hora_fim: horaFormatada + "-03:00"
+                    };
+                    console.log(agendamentoData)
+                    const options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'authorization': token
+                        },
+                        body: JSON.stringify(agendamentoData)
+                    };
+                    fetch("http://localhost:3030/agendamento", options)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erro ao criar recurso');
+                            }
+                            return response.json();
+                        })
+                        .then(agendamento => {
+                            alert("Agendamento feito com sucesso!")
+                            window.location.reload(true)
+                        })
+                        .catch(error => {
+                            console.error('Erro ao criar agendamento: ', error);
+                        });
+                } else {
+                    alert("Este horário não está disponível")
+                }
+            } else {
+                alert("A empresa não trabalha neste dia!")
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao editar procedimento: ', error);
+        });
+}
+
+function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
+    // Converte os horários para objetos Date para facilitar a comparação
+    const iniIntDate = "2024-04-20T" + inicioIntervalo + ":00"
+    const fimIntDate = "2024-04-20T" + fimIntervalo + ":00"
+    const horarioIntDate = "2024-04-20T" + horario
+    //console.log(iniIntDate + "\n" + fimIntDate + "\n" + horarioIntDate)
+
+    const horarioDate = new Date(horarioIntDate);
+    const inicioIntervaloDate = new Date(iniIntDate);
+    const fimIntervaloDate = new Date(fimIntDate);
+
+    //console.log(horarioDate + "\n" + inicioIntervaloDate + "\n" + fimIntervaloDate)
+
+    // Verifica se o horário está dentro do intervalo
+    return horarioDate >= inicioIntervaloDate && horarioDate <= fimIntervaloDate;
 }
