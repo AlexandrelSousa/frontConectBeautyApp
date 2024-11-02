@@ -1,3 +1,5 @@
+const URLAPI = "https://app-agendamento-sigma.vercel.app"
+
 function registerUser(){
 
     const userData = {
@@ -9,7 +11,7 @@ function registerUser(){
     };
     console.log("email: "+ userData.email + "\nnome: " + userData.nome + "\ntelefone: " + userData.telefone + "\nsenha: " + userData.senha + "\nconfirmSenha: " + userData.confirmSenha)
     
-    fetch('http://localhost:3030/clientes/cadastro', {
+    fetch(`${URLAPI}/clientes/cadastro`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
