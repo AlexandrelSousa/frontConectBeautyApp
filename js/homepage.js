@@ -154,86 +154,89 @@ function perfilButton() {
     document.getElementById("perfil").style.display = "block"
     document.getElementById("feed").style.display = "none"
     document.getElementById("perfil-empresa").style.display = "none"
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'authorization': token
-        }
-    };
-    fetch("http://localhost:3030/agendamento", options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao criar recurso');
+    if (tipoDeUsuario == "cliente") {
+        document.getElementById("perfil-box-agenda").style.display = "none";
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token
             }
-            return response.json();
-        })
-        .then(agendamento => {
-            console.log(agendamento)
-            box = document.getElementById("perfil-box-procedimentos")
-            box.innerHTML = ''
-            console.log(agendamento.length)
-            for(let i=0; i<agendamento.length;i++){
-                box.innerHTML += `<div class="box-agendamento">
-                <div class="excluirAgd"></div>
-                <div class="tag"></div>
-                <div id="agendamento-infos" class="agendamento-infos">
-                    <div id="agendamento-titulo" class="agendamento-titulo">
-                    </div>
-                    <div id="agendamento-empresa" class="agendamento-info"></div>
-                    <div id="agendamento-dia" class="agendamento-info"></div>
-                    <div id="agendamento-hora" class="agendamento-info"></div>
-                </div>
-                </div>`
-                document.getElementById("agendamento-titulo").id += "-" + i
-                document.getElementById("agendamento-infos").id += "-" + i
-                document.getElementById("agendamento-empresa").id += "-" + i
-                document.getElementById("agendamento-dia").id += "-" + i
-                document.getElementById("agendamento-hora").id += "-" + i
-
-                
-                document.getElementById("agendamento-dia-" + i).innerHTML = "No dia: " + agendamento[i].data.substring(0,10)
-                document.getElementById("agendamento-hora-" + i).innerHTML = "As: " + agendamento[i].hora_inicio.substring(0,5)
-                
-                const options2 = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'authorization': token
-                    }
+        };
+        fetch("http://localhost:3030/agendamento", options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao criar recurso');
                 }
-                fetch("http://localhost:3030/empresa/" + agendamento[i].id_emp, options2)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao consular recurso');
+                return response.json();
+            })
+            .then(agendamento => {
+                console.log(agendamento)
+                box = document.getElementById("perfil-box-procedimentos")
+                box.innerHTML = ''
+                console.log(agendamento.length)
+                for (let i = 0; i < agendamento.length; i++) {
+                    box.innerHTML += `<div class="box-agendamento">
+                    <div class="excluirAgd"></div>
+                    <div class="tag"></div>
+                    <div id="agendamento-infos" class="agendamento-infos">
+                        <div id="agendamento-titulo" class="agendamento-titulo">
+                        </div>
+                        <div id="agendamento-empresa" class="agendamento-info"></div>
+                        <div id="agendamento-dia" class="agendamento-info"></div>
+                        <div id="agendamento-hora" class="agendamento-info"></div>
+                    </div>
+                    </div>`
+                    document.getElementById("agendamento-titulo").id += "-" + i
+                    document.getElementById("agendamento-infos").id += "-" + i
+                    document.getElementById("agendamento-empresa").id += "-" + i
+                    document.getElementById("agendamento-dia").id += "-" + i
+                    document.getElementById("agendamento-hora").id += "-" + i
+
+
+                    document.getElementById("agendamento-dia-" + i).innerHTML = "No dia: " + agendamento[i].data.substring(0, 10)
+                    document.getElementById("agendamento-hora-" + i).innerHTML = "As: " + agendamento[i].hora_inicio.substring(0, 5)
+
+                    const options2 = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'authorization': token
+                        }
                     }
-                    return response.json();
-                })
-                .then(empresa => {
-                    document.getElementById("agendamento-empresa-" + i).innerHTML = "Na empresa: " + empresa.nome
-                })
-                .catch(error => {
-                    console.error('Erro ao consultar empresa ', error);
-                });
-                fetch("http://localhost:3030/procedimento/unico/" + agendamento[i].id_pro, options2)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao consular recurso');
-                    }
-                    return response.json();
-                })
-                .then(procedimento => {
-                    console.log(procedimento)
-                    document.getElementById("agendamento-titulo-" + i).innerHTML = procedimento.nome
-                })
-                .catch(error => {
-                    console.error('Erro ao consultar empresa ', error);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao consultar agendamento: ', error);
-        });
+                    fetch("http://localhost:3030/empresa/" + agendamento[i].id_emp, options2)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erro ao consular recurso');
+                            }
+                            return response.json();
+                        })
+                        .then(empresa => {
+                            document.getElementById("agendamento-empresa-" + i).innerHTML = "Na empresa: " + empresa.nome
+                        })
+                        .catch(error => {
+                            console.error('Erro ao consultar empresa ', error);
+                        });
+                    fetch("http://localhost:3030/procedimento/unico/" + agendamento[i].id_pro, options2)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erro ao consular recurso');
+                            }
+                            return response.json();
+                        })
+                        .then(procedimento => {
+                            console.log(procedimento)
+                            document.getElementById("agendamento-titulo-" + i).innerHTML = procedimento.nome
+                        })
+                        .catch(error => {
+                            console.error('Erro ao consultar empresa ', error);
+                        });
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao consultar agendamento: ', error);
+            });
+    }
 }
 function feedButton() {
     document.getElementById("perfil").style.display = "none"
@@ -422,7 +425,9 @@ function fecharEdit() {
 
 function editarPerfil() {
     if (document.getElementById("edit-senha").value === "") {
-        alert("Insira uma senha!")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Insira uma senha!");
+
     } else {
         document.getElementById("pop-up-confirm-edit").style.display = "flex";
     }
@@ -504,7 +509,8 @@ function confirmarEdicao() {
         })
         .catch(error => {
             console.error('Erro durante a autenticação do usuário:', error.message);
-            alert('Erro durante a autenticação: ' + error.message);
+            document.getElementById("fundo-escuro-erro").style.display = "flex";
+            document.getElementById("fundo-escuro-erro-texto").innerHTML = ('Erro durante a autenticação: ' + error.message);
         });
 }
 
@@ -671,7 +677,8 @@ function adicionarProcedimento() {
     } else if (CheckboxOutros.checked === true) {
         categoria = "outros"
     } else {
-        alert("Selecione uma categoria")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Selecione uma categoria");
     }
     procedimento = {
         nome: document.getElementById("adicionar-novo-procedimento-nome").value,
@@ -683,13 +690,17 @@ function adicionarProcedimento() {
     console.log(procedimento)
     // Configurações da requisição
     if (procedimento.nome === "") {
-        alert("Dê um nome para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê um nome para o procedimento");
     } else if (procedimento.descricao === "") {
-        alert("Dê uma descrição para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê uma descrição para o procedimento");
     } else if (procedimento.preco === "") {
-        alert("Dê um preço para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê um preço para o procedimento");
     } else if (procedimento.duracao === "") {
-        alert("Dê uma duração para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê uma duração para o procedimento");
     } else {
         const options = {
             method: 'POST',
@@ -737,7 +748,8 @@ function editarProcedimento() {
     } else if (CheckboxOutros.checked === true) {
         categoria = "outros"
     } else {
-        alert("Selecione uma categoria")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Selecione uma categoria");
     }
     const procedimento = {
         nome_antigo: localStorage.getItem('nomeAntigo'),
@@ -748,13 +760,17 @@ function editarProcedimento() {
         categoria: categoria
     }
     if (procedimento.nome === "") {
-        alert("Dê um nome para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê um nome para o procedimento");
     } else if (procedimento.descricao === "") {
-        alert("Dê uma descrição para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê uma descrição para o procedimento");
     } else if (procedimento.preco === "") {
-        alert("Dê um preço para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê um preço para o procedimento");
     } else if (procedimento.duracao === "") {
-        alert("Dê uma duração para o procedimento")
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Dê uma duração para o procedimento");
     } else {
         const options = {
             method: 'PUT',
@@ -1247,6 +1263,7 @@ function listarTodos() {
                             document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
                             document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
                             document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
+                            document.getElementById("feed-empresas-coluna-imagem-linha-" + i + "-coluna-" + j).style.backgroundImage = `url(http://localhost:3030/${data[k].logo})`
                         } else {
                             break;
                         }
@@ -1370,6 +1387,8 @@ function agendar(infos) {
             'authorization': token
         }
     };
+
+    // Verifica se o CNPJ está presente nos dados
     fetch("http://localhost:3030/empresa/" + infos.dataset.cnpj, options)
         .then(response => {
             if (!response.ok) {
@@ -1378,33 +1397,37 @@ function agendar(infos) {
             return response.json();
         })
         .then(data => {
-            console.log(data)
-            var date = document.getElementById("agendamento-data")
-            var date2 = new Date(date.value);
-            var diaDaSemana = date2.getDay()
-            var hora = document.getElementById("agendamento-hora")
-            console.log(date.value + "\n" + hora.value)
-            if (diaDaSemana == 6) {
-                diaDaSemana = 0
-            } else {
-                diaDaSemana++
-            }
+            console.log(data);
+            var date = document.getElementById("agendamento-data");
+            var date2 = new Date(date.value); // Certifique-se de que date.value está no formato correto
+            var diaDaSemana = date2.getDay();
+            var hora = document.getElementById("agendamento-hora").value; // Obtenha o valor diretamente
+            console.log(date.value + "\n" + hora);
+
+            // Ajusta o dia da semana
+            diaDaSemana = (diaDaSemana === 6) ? 0 : diaDaSemana + 1;
+
             if (data.dias_func[diaDaSemana]) {
-                if (horarioEstaNoIntervalo(hora.value, data.inicio_expediente, data.fim_expediente)) {
-                    var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss'); // Horário 1: 08:30:00
-                    var hora2 = moment(hora.value, 'HH:mm'); // Horário 2: 02:45:00
+                // Verifica se o horário está no intervalo
+                if (horarioEstaNoIntervalo(hora, data.inicio_expediente, data.fim_expediente)) {
+                    var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss'); // Duração
+                    var hora2 = moment(hora, 'HH:mm'); // Hora do agendamento
                     var somaTotal = moment({}).startOf('day')
-                        .add(hora1.hours(), 'hours').add(hora2.hours(), 'hours')
-                        .add(hora1.minutes(), 'minutes').add(hora2.minutes(), 'minutes');
+                        .add(hora1.hours(), 'hours')
+                        .add(hora1.minutes(), 'minutes')
+                        .add(hora2.hours(), 'hours')
+                        .add(hora2.minutes(), 'minutes');
                     var horaFormatada = somaTotal.format('HH:mm:ss');
+
                     const agendamentoData = {
                         id_pro: document.getElementById("agendamento-button").dataset.idpro,
                         cnpj: document.getElementById("agendamento-button").dataset.cnpj,
-                        data: date.value + "T00:00:00-03:00",
-                        hora_inicio: hora.value + ":00-03:00",
+                        data: date.value + "T00:00:00-03:00", // Formato de data
+                        hora_inicio: hora + ":00-03:00", // Ajustar formato
                         hora_fim: horaFormatada + "-03:00"
                     };
-                    console.log(agendamentoData)
+                    console.log(agendamentoData);
+
                     const options = {
                         method: 'POST',
                         headers: {
@@ -1413,6 +1436,7 @@ function agendar(infos) {
                         },
                         body: JSON.stringify(agendamentoData)
                     };
+
                     fetch("http://localhost:3030/agendamento", options)
                         .then(response => {
                             if (!response.ok) {
@@ -1421,23 +1445,28 @@ function agendar(infos) {
                             return response.json();
                         })
                         .then(agendamento => {
-                            alert("Agendamento feito com sucesso!")
-                            window.location.reload(true)
+                            document.getElementById("fundo-escuro-erro").style.display = "flex";
+                            document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Agendamento feito com sucesso!");
+                            // Considere atualizar apenas a parte do DOM que precisa ser atualizada
+                            window.location.reload(true); // Atualização total da página
                         })
                         .catch(error => {
                             console.error('Erro ao criar agendamento: ', error);
                         });
                 } else {
-                    alert("Este horário não está disponível")
+                    document.getElementById("fundo-escuro-erro").style.display = "flex";
+                    document.getElementById("fundo-escuro-erro-texto").innerHTML = ("Este horário não está disponível!");
                 }
             } else {
-                alert("A empresa não trabalha neste dia!")
+                document.getElementById("fundo-escuro-erro").style.display = "flex";
+                document.getElementById("fundo-escuro-erro-texto").innerHTML = ("A empresa não trabalha neste dia!");
             }
         })
         .catch(error => {
             console.error('Erro ao editar procedimento: ', error);
         });
 }
+
 
 function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
     // Converte os horários para objetos Date para facilitar a comparação
@@ -1454,4 +1483,228 @@ function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
 
     // Verifica se o horário está dentro do intervalo
     return horarioDate >= inicioIntervaloDate && horarioDate <= fimIntervaloDate;
+}
+
+function buttonSair() {
+    window.location.href = "../index.html";
+}
+
+function buttonExcluir() {
+    document.getElementById("fundoEscuro").style.display = "flex"
+}
+
+function fecharBoxErro() {
+    document.getElementById("fundo-escuro-erro").style.display = "none";
+}
+
+function preencherCalendario() {
+    const hoje = new Date(); // Data atual
+    const mesAtual = hoje.getMonth(); // Mês atual (0-11)
+    const anoAtual = hoje.getFullYear(); // Ano atual
+    const primeiroDiaDoMes = new Date(anoAtual, mesAtual, 1); // Primeiro dia do mês
+    const ultimoDiaDoMes = new Date(anoAtual, mesAtual + 1, 0); // Último dia do mês
+    const diasDoMes = ultimoDiaDoMes.getDate(); // Total de dias no mês
+    const diaDaSemanaDoPrimeiroDia = primeiroDiaDoMes.getDay(); // Dia da semana do primeiro dia (0-6)
+
+    // Obtém os elementos da tabela
+    const dias = document.querySelectorAll("td[id^='dia']");
+
+    // Limpa o conteúdo das células e pinta as não preenchidas
+    dias.forEach(dia => {
+        dia.innerHTML = ""; // Limpa as células do calendário
+        dia.style.backgroundColor = "#f5dacd"; // Define a cor de fundo padrão
+    });
+
+    // Preenche os dias no calendário
+    for (let dia = 1; dia <= diasDoMes; dia++) {
+        const diaElement = document.getElementById(`dia${dia + diaDaSemanaDoPrimeiroDia}`); // Ajusta o ID para a posição correta
+        if (diaElement) {
+            diaElement.innerHTML = dia; // Preenche o dia na célula correspondente
+            diaElement.style.backgroundColor = ""; // Remove a cor de fundo se o dia for preenchido
+            diaElement.setAttribute("name", dia); // Define o valor do dia como o atributo name
+        }
+    }
+    // Adiciona o nome do mês atual ao elemento <p> com o id "agenda-mes"
+    const meses = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    const mesAtualNome = meses[hoje.getMonth()]; // Obtém o nome do mês atual
+    document.getElementById("agenda-mes").innerText = mesAtualNome; // Preenche o <p>
+
+}
+
+// Chama a função para preencher o calendário ao carregar a página
+window.onload = preencherCalendario;
+
+const options = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'authorization': token
+    },
+};
+
+fetch(`http://localhost:3030/agendamento/${id}`, options)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao consultar agendamento');
+        }
+        return response.json();
+    })
+    .then(agendamentos => {
+        console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
+
+        agendamentos.forEach(agendamento => {
+            var dataAgdo = new Date(agendamento.data);
+            var diaAgdo = dataAgdo.getDate();
+
+            var lacunas = document.getElementsByName(diaAgdo.toString()); 
+
+            for (var i = 0; i < lacunas.length; i++) {
+                console.log("Elemento " + i + ":", lacunas[i]);
+                if (lacunas[i]) {
+                    lacunas[i].style.textDecoration = "underline";
+                    lacunas[i].style.color = "#f7abc2";
+                } else {
+                    console.warn('Elemento no índice ' + i + ' é undefined');
+                }
+            }
+
+            if (lacunas.length > 0) {
+                lacunas[0].style.textDecoration = "underline";
+            } else {
+                console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao consultar agendamento: ', error);
+    });
+
+
+
+function exibirAgendamentosDoDia(dia) {
+    document.getElementById("fundoEscuro4").style.display = "flex";
+    document.getElementById("data-agenda").innerHTML = "Data: " + dia; // Exibir a data selecionada no modal
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': token
+        },
+    };
+
+    fetch(`http://localhost:3030/agendamento/${id}`, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao criar recurso');
+            }
+            return response.json();
+        })
+        .then(agendamentos => {
+
+            console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
+
+            const agora = new Date();
+            const mesAtual = agora.getMonth();
+            const anoAtual = agora.getFullYear();
+            agendamentos.forEach(agendamento => {
+                const dataAgendamento = new Date(agendamento.data);
+                const mesAgendamento = dataAgendamento.getMonth();
+                const anoAgendamento = dataAgendamento.getFullYear();
+                const diaAgendamento = dataAgendamento.getDate();
+                console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\ndia atual: " + document.getElementById(dia).innerHTML + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento + "\ndia agendamento: " + diaAgendamento)
+                if (mesAgendamento === mesAtual && anoAgendamento === anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
+                    console.log("teste")
+                    document.getElementById("lista-agendamentos").innerHTML += `
+                            <ul id="agendamentos-lista" class="agendamentos-lista">
+                                <li>
+                                    <label for="cliente1">Nome do Cliente</label>
+                                </li>
+                                <li>
+                                    <input type="text" id="cliente${agendamento.id_agdo}" name="cliente1" disabled>
+                                </li>
+                                <li>
+                                    <label for="procedimento1">Procedimento:</label>
+                                </li>
+                                <li>
+                                    <input type="text" id="procedimento${agendamento.id_agdo}" name="procedimento1" disabled>
+                                </li>
+                                <li>
+                                    <label for="data1">Data:</label>
+                                </li>
+                                <li>
+                                    <input type="date" id="data${agendamento.id_agdo}" name="data1" disabled>
+                                </li>
+                                <li>
+                                    <label for="hora1">Hora Marcada:</label>
+                                </li>
+                                <li>
+                                    <input type="time" id="hora${agendamento.id_agdo}" name="hora1" disabled>
+                                </li>
+                            </ul>
+                        `
+                    const options2 = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    };
+
+                    fetch(`http://localhost:3030/clientes/${agendamento.id_cli}`, options2)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erro ao consultar cliente');
+                            }
+                            return response.json();
+                        })
+                        .then(cliente => {
+                            document.getElementById(`cliente${agendamento.id_agdo}`).value = cliente.nome;
+                        })
+                        .catch(error => {
+                            console.error('Erro ao consultar cliente: ', error);
+                        });
+
+                    fetch(`http://localhost:3030/procedimento/unico/${agendamento.id_pro}`, options2)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erro ao consultar procedimento');
+                            }
+                            return response.json();
+                        })
+                        .then(procedimento => {
+                            document.getElementById(`procedimento${agendamento.id_agdo}`).value = procedimento.nome;
+                        })
+                        .catch(error => {
+                            console.error('Erro ao consultar procedimento: ', error);
+                        });
+
+                    document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
+                    document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao consultar agendamento: ', error);
+        });
+}
+
+
+function fecharAgendamentosDoDia() {
+    document.getElementById("fundoEscuro4").style.display = "none";
+    document.getElementById("lista-agendamentos").innerHTML = ""
+}
+
+function formatarData(dataISO) {
+    // Converte a string ISO em um objeto de data
+    const data = new Date(dataISO);
+
+    // Extrai o ano, mês e dia e formata para 'YYYY-MM-DD'
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês é de 0 a 11
+    const dia = String(data.getDate()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}`;
 }

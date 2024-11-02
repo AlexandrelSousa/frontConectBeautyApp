@@ -24,7 +24,7 @@
             </div>
             <div class="login-box-senha">
                 <label class="login-box-senha-icon"><img src="../assets/enterpriseName.png"></label>
-                <input type="text" class="login-box-senha-input" placeholder="NOME EMPRESA" id="nome">
+                <input type="text" class="login-box-senha-input" placeholder="NOME EMPRESA" id="nome" maxlength="17">
             </div>
             <div class="login-box-login">
                 <label class="login-box-login-icon"><img src="../assets/telefone-icon.png"></label>
@@ -34,7 +34,7 @@
                 <label class="login-box-login-icon"><img src="../assets/pin.png"></label>
                 <input type="text" class="login-box-login-input" placeholder="CIDADE" id="cidade">
             </div>
-            <div class="login-box-buttom"><button disabled class="buttonControlPage"><</button><button onclick="nextForm1()" class="buttonControlPage">></button><button class="OKButton" onclick="registerEmpresa()">OK</button></div>    
+            <div class="login-box-buttom"><button disabled class="buttonControlPage"><</button><button class="OKButton" onclick="registerEmpresa()">OK</button><button onclick="nextForm1()" class="buttonControlPage">></button></div>    
         </div>
         <!-- SEGUNDA PARTE DO FORMULÁRIO  -->
         <div class="login-box-line" id="form2" style="display: none;">
@@ -55,7 +55,7 @@
                 <label class="login-box-senha-icon"><img src="../assets/info.png"></label>
                 <textarea cols="30" rows="5" id="descrição" class="descricao" placeholder="DESCRIÇÂO"></textarea>
             </div>
-            <div class="login-box-buttom"><button onclick="previousForm2()" class="buttonControlPage"><</button><button onclick="nextForm2()" class="buttonControlPage">></button><button class="OKButton" onclick="registerEmpresa()">OK</button></div>
+            <div class="login-box-buttom"><button onclick="previousForm2()" class="buttonControlPage"><</button><button class="OKButton" onclick="registerEmpresa()">OK</button><button onclick="nextForm2()" class="buttonControlPage">></button></div>
         </div>
         <!-- TERCEIRA PARTE DO FORMULÁRIO  -->
         <div class="login-box-line" id="form3" style="display: none;">
@@ -94,8 +94,25 @@
                     <input type="time" id="horaFinal">
                 </div>
             </div>
-            <div class="login-box-buttom"><button onclick="previousForm3()" class="buttonControlPage"><</button><button class="buttonControlPage" disabled>></button><button onclick="registerEmpresa()" class="OKButton">OK</button></div>
+            <div class="login-box-buttom"><button onclick="previousForm3()" class="buttonControlPage"><</button><button onclick="registerEmpresa()" class="OKButton">OK</button><button class="buttonControlPage" onclick="nextForm3()">></button></div>
         </div>
+        <!-- QUARTA PARTE DO FORMULÁRIO -->
+        <div class="login-box-line" id="form4" style="display: none;">
+            <div class="login-box-titulo"><h1>CADASTRAR<br>EMPRESA</h1></div>
+            <div class="login-box-logo">
+                <div class="login-box-logo-titulo">
+                    <h2>LOGO DA EMPRESA</h2>
+                </div>
+                <div class="login-box-logo-imagem">
+                    <img src="../assets/no-imagem.jpg" width="100%" height="100%" id="logo-img">
+                </div>
+                <div class="login-box-logo-input">
+                    <input type="file" accept="image/png, image/jpeg, image/jpg, image/gif" id="uploadImage">
+                </div>
+            </div>
+            <div class="login-box-buttom"><button onclick="previousForm4()" class="buttonControlPage"><</button><button onclick="registerEmpresa()" class="OKButton">OK</button><button class="buttonControlPage" disabled>></button></div>
+        </div>
+        <img src="../logos/" alt="">
     </div>
 </body>
 </html>

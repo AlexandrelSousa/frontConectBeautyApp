@@ -142,13 +142,17 @@ body{
     background-color: var(--main-color1);
     width: 30%;
     height: 100%;
-    margin-right: 5%;
     border: none;
     border-radius: 10px;
     font-size: large;
     color: #fff;
     font-family: sans-serif;
     letter-spacing: 0.2em;
+}
+
+.OKButton:disabled{
+    background-color: #dddddd;
+    color: #1b191a;
 }
 
 .buttonControlPage:disabled{
@@ -160,7 +164,10 @@ body{
     width: 30%;
     height: 100%;
     background-color: var(--main-color1);
-    border: none;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin-right: 5%;
+    margin-left: 5%;
     border-radius: 10px;
     font-size: large;
     color: #fff;
@@ -187,6 +194,61 @@ body{
     border-radius: 10px;
     height: 30% !important;
 }
+
+.login-box-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    align-content: space-between;
+    justify-content: center;
+    border: 2px solid #1b191a;
+    border-radius: 10px;
+    height: 70% !important;
+}
+
+.login-box-logo h2{
+    font-size:medium;
+    font-family: sans-serif;
+    color: var(--main-color1);
+}
+
+#logo-img{
+    object-fit: cover;
+    object-position: center;
+}
+
+.login-box-logo-imagem{
+    display: flex;
+    flex-direction: row;
+    height: 80% !important;
+    width: 90% !important;
+    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-box-logo-input{
+    display: flex;
+    flex-direction: row;
+    height: 15% !important;
+    width: 90% !important;
+    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box-logo-titulo{
+    width: 90%;
+    height: 15% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-box-funcionamento h2{
     font-size:medium;
     font-family: sans-serif;

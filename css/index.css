@@ -148,3 +148,66 @@ body{
     font-family: sans-serif;
     letter-spacing: 0.2em;
 }
+
+.fundo-escuro-erro{
+    background-color: rgba(0, 0, 0, 0.10);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.erro-box{
+    background-color: #fff;
+    width: 80%;
+    height: 25%;
+    border-radius: 1vh;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+    font-family: sans-serif;
+    letter-spacing: 0.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.erro-box-titulo{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color3);
+}
+
+.erro-box-texto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 40%;
+}
+
+.erro-box-botao{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.erro-box-botao button{
+    width: 70%;
+    height: 70%;
+    border-radius: 1vh;
+    font-size: large;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    font-family: sans-serif;
+    border: none;
+    background-color: var(--main-color3);
+    color: #fff;
+}

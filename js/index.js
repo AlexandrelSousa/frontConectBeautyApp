@@ -24,12 +24,12 @@ function authenticateUser(){
     console.log('Usuário autenticado com sucesso:', data);
     console.log(data.acessToken)
     localStorage.setItem('token', data.acessToken);
-    alert('Usuário autenticado com sucesso!');
     window.location.href = './html/homepage.html';
   })
   .catch(error => {
     console.error('Erro durante a autenticação do usuário:', error.message);
-    alert('Erro durante a autenticação: ' + error.message);
+    document.getElementById("fundo-escuro-erro").style.display = "flex";
+    document.getElementById("fundo-escuro-erro-texto").innerHTML = ('Erro durante a autenticação do usuário:', error.message);
   });
 }
 
@@ -38,4 +38,8 @@ function replaceCadastro(){
 }
 function replaceCadastroEmpresa(){
   location.replace("./html/cadastroEmpresa.html", "_self");
+}
+
+function fecharBoxErro(){
+  document.getElementById("fundo-escuro-erro").style.display = "none";
 }

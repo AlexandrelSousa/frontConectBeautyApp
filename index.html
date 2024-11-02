@@ -23,10 +23,23 @@
                 <input type="password" class="login-box-senha-input" placeholder="SENHA" id="senha">
             </div>
             <div class="login-box-esquecisenha">
-                <p class="login-box-esquecisenha-p"><label onclick="replaceCadastro()">NÃO POSSUO UMA CONTA</label></p>
+                <p class="login-box-esquecisenha-p"><label onclick="replaceCadastro()">CADASTRAR CLIENTE</label></p>
                 <p class="login-box-esquecisenha-p"><label onclick="replaceCadastroEmpresa()">CADASTRAR EMPRESA</label></p>
             </div>
             <div class="login-box-buttom"><button onclick="authenticateUser()">ENTRAR</button></div>
+        </div>
+    </div>
+    <div class="fundo-escuro-erro" id="fundo-escuro-erro">
+        <div class="erro-box">
+            <div class="erro-box-titulo">
+                <h2>ERRO</h2>
+            </div>
+            <div class="erro-box-texto">
+                <p id="fundo-escuro-erro-texto"></p>
+            </div>
+            <div class="erro-box-botao">
+                <button onclick="fecharBoxErro()">OK</button>
+            </div>
         </div>
     </div>
 </body>
