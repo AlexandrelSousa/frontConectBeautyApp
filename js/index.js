@@ -7,7 +7,7 @@ function authenticateUser(){
   
   const URLAPI = "https://api-conect-beauty.vercel.app"
 
-  fetch(`${URLAPI}/login`, {
+  fetch(`${URLAPI}/api/login`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
