@@ -11,7 +11,7 @@ function registerUser(){
     };
     console.log("email: "+ userData.email + "\nnome: " + userData.nome + "\ntelefone: " + userData.telefone + "\nsenha: " + userData.senha + "\nconfirmSenha: " + userData.confirmSenha)
     
-    fetch(`${URLAPI}/cadastro`, {
+    fetch(`${URLAPI}/api/clientes/cadastro`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
