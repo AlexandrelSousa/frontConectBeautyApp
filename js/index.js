@@ -5,7 +5,7 @@ function authenticateUser(){
     senha: document.getElementById("senha").value
   };
   
-  const URLAPI = "https://api-conect-beauty.vercel.app/"
+  const URLAPI = "https://api-conect-beauty.vercel.app"
 
   fetch(`${URLAPI}/login`, {
     method: 'POST',
