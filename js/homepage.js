@@ -21,6 +21,9 @@ if (tokenData.id === undefined) {
     console.log(id)
     tipoDeUsuario = "cliente"
 }
+
+console.log(tipoDeUsuario)
+
 fetch(url, {
     method: 'GET',
     headers: {
