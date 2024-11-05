@@ -1,4 +1,4 @@
-const URLAPI = "https://app-agendamento-sigma.vercel.app"
+const URLAPI = "https://api-conect-beauty.vercel.app"
 
 function registerUser(){
 
@@ -11,7 +11,7 @@ function registerUser(){
     };
     console.log("email: "+ userData.email + "\nnome: " + userData.nome + "\ntelefone: " + userData.telefone + "\nsenha: " + userData.senha + "\nconfirmSenha: " + userData.confirmSenha)
     
-    fetch(`${URLAPI}/clientes/cadastro`, {
+    fetch(`${URLAPI}/cadastro`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
