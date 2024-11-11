@@ -14,11 +14,11 @@ let tipoDeUsuario = ""
 if (tokenData.id === undefined) {
     id = tokenData.cnpj
     console.log(id)
-    url = `${URLAPI}/empresa`;
+    url = `${URLAPI}/api/empresa`;
     tipoDeUsuario = "empresa"
 } else {
     id = tokenData.id
-    url = `${URLAPI}/clientes`;
+    url = `${URLAPI}/api/clientes`;
     console.log(id)
     tipoDeUsuario = "cliente"
 }
