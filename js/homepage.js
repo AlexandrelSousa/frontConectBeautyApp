@@ -7,17 +7,18 @@ let procedimentosComID = {
     nome: [],
     id: []
 }
+const URLAPI = "https://api-conect-beauty.vercel.app"; 
 let id = ""
 let url = ""
 let tipoDeUsuario = ""
 if (tokenData.id === undefined) {
     id = tokenData.cnpj
     console.log(id)
-    url = `http://localhost:3030/empresa`;
+    url = `${URLAPI}/empresa`;
     tipoDeUsuario = "empresa"
 } else {
     id = tokenData.id
-    url = `http://localhost:3030/clientes`;
+    url = `${URLAPI}/clientes`;
     console.log(id)
     tipoDeUsuario = "cliente"
 }
