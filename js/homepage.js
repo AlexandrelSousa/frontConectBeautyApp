@@ -443,7 +443,7 @@ function confirmarEdicao() {
         emailOuCNPJ: document.getElementById("edit-cnpj").value,
         senha: document.getElementById("pop-up-corfirm-edit-senha").value
     };
-    fetch(`${URLAPI}/cliente`, {
+    fetch(`${URLAPI}/clientes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -497,7 +497,7 @@ function confirmarEdicao() {
                 body: JSON.stringify(dataEdit) // Converte os dados para JSON e os adiciona ao corpo da requisição
             };
             // Realiza a requisição PUT
-            fetch(`${URLAPI}/cliente`, options)
+            fetch(`${URLAPI}/clientes`, options)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erro ao atualizar recurso');
