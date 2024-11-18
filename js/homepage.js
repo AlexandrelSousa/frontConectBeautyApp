@@ -24,6 +24,7 @@ if (tokenData.id === undefined) {
 }
 
 console.log(tipoDeUsuario)
+console.log(token)
 
 fetch(url, {
     method: 'GET',
@@ -39,7 +40,7 @@ fetch(url, {
         return response.json();
     })
     .then(dataUser => {
-        if (tipoDeUsuario == "empresa") {
+        if (tipoDeUsuario === "empresa") {
             document.getElementById("perfil-box-titulo-h2").innerHTML = dataUser.nome;
             document.getElementById("perfil-box-info-cidade").innerHTML = dataUser.cidade;
             document.getElementById("perfil-box-info-endereco").innerHTML = dataUser.logradouro + " - " + dataUser.bairro + ", " + dataUser.numero
@@ -134,6 +135,7 @@ fetch(url, {
                 document.getElementById("perfil-box-info-avaliacoes-estrelas-5").style.backgroundColor = "#ddd"
             }
         } else {
+            console.log(dataUser.nome)
             document.getElementById("perfil-box-titulo-h2").innerHTML = dataUser.nome;
             document.getElementById("perfil-box-info-cidade").innerHTML = "Seu email: " + dataUser.email;
             document.getElementById("perfil-box-info-endereco").innerHTML = "Seu telefone: " + dataUser.telefone
