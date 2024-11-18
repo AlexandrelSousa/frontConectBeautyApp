@@ -443,7 +443,7 @@ function confirmarEdicao() {
         emailOuCNPJ: document.getElementById("edit-cnpj").value,
         senha: document.getElementById("pop-up-corfirm-edit-senha").value
     };
-    fetch(`${URLAPI}/login`, {
+    fetch(`${URLAPI}/cliente`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
