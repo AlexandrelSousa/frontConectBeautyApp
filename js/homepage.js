@@ -361,9 +361,8 @@ function excluirPerfil() {
             window.location.href = '../index.html';
         })
         .catch(error => console.error('Erro:', error));
-
-
 }
+
 function excluirConfirm() {
     document.getElementById("fundoEscuro").style.display = "flex";
 }
@@ -444,7 +443,7 @@ function confirmarEdicao() {
         emailOuCNPJ: document.getElementById("edit-cnpj").value,
         senha: document.getElementById("pop-up-corfirm-edit-senha").value
     };
-    fetch('http://localhost:3030/login', {
+    fetch(`${URLAPI}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -498,7 +497,7 @@ function confirmarEdicao() {
                 body: JSON.stringify(dataEdit) // Converte os dados para JSON e os adiciona ao corpo da requisição
             };
             // Realiza a requisição PUT
-            fetch(url, options)
+            fetch(`${URLAPI}/cliente`, options)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erro ao atualizar recurso');
