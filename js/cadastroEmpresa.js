@@ -88,7 +88,7 @@ function registerEmpresa() {
     const inputFiles = document.getElementById("uploadImage").files[0];
 
     if (validarCNPJ(document.getElementById("cnpj").value)) {
-        // Cria um objeto FormData
+       
         const formData = new FormData();
         
         // Adiciona os dados da empresa ao FormData
@@ -126,7 +126,7 @@ function registerEmpresa() {
         }
 
         // Faz a requisição POST com o FormData
-        fetch(`${URLAPI}/api/empresa/cadastrar`, {
+        fetch(URLAPI + "/api/empresa/cadastrar", {
             method: 'POST',
             body: formData // Envia o FormData com todos os dados e arquivos
         })
