@@ -1269,6 +1269,7 @@ function listarTodos() {
                             document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
                             document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
                             document.getElementById("feed-empresas-coluna-imagem-linha-" + i + "-coluna-" + j).style.backgroundImage = `url(${data[k].logo})`;
+                            console.log(data[k].logo);
                         } else {
                             break;
                         }
