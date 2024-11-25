@@ -153,5 +153,3 @@ function registerEmpresa() {
         alert("CNPJ inválido");
     }
 }
-
-

@@ -46,7 +46,7 @@ fetch(url, {
             document.getElementById("perfil-box-info-endereco").innerHTML = dataUser.logradouro + " - " + dataUser.bairro + ", " + dataUser.numero
             document.getElementById("perfil-box-info-funcionamento").innerHTML = "Aberto das " + dataUser.inicio_expediente.substring(0, 5) + " as " + dataUser.fim_expediente.substring(0, 5)
             document.getElementById("perfil-box-info-botaoExcluir").style.display = "none";
-            fetch('http://localhost:3030/procedimento', {
+            fetch(URLAPI + '/api/procedimento', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ function perfilButton() {
                 'authorization': token
             }
         };
-        fetch("http://localhost:3030/agendamento", options)
+        fetch( URLAPI + "/api/agendamento", options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao criar recurso');
@@ -210,7 +210,7 @@ function perfilButton() {
                             'authorization': token
                         }
                     }
-                    fetch("http://localhost:3030/empresa/" + agendamento[i].id_emp, options2)
+                    fetch(URLAPI + "/api/empresa" + agendamento[i].id_emp, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consular recurso');
@@ -223,7 +223,7 @@ function perfilButton() {
                         .catch(error => {
                             console.error('Erro ao consultar empresa ', error);
                         });
-                    fetch("http://localhost:3030/procedimento/unico/" + agendamento[i].id_pro, options2)
+                    fetch( URLAPI + "/api/procedimento/unico" + agendamento[i].id_pro, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consular recurso');
@@ -256,7 +256,7 @@ function empresaButton(empresa) {
     document.getElementById("perfil-box").style.display = "flex"
     document.getElementById("wrapper").style.display = "none"
 
-    fetch('http://localhost:3030/empresa/' + empresa.dataset.id, {
+    fetch(URLAPI + '/api/empresa/' + empresa.dataset.id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -276,7 +276,7 @@ function empresaButton(empresa) {
         }).catch(error => {
             console.error('Erro:', error);
         });
-    fetch('http://localhost:3030/procedimento/' + empresa.dataset.id, {
+    fetch(URLAPI + '/api/procedimento/' + empresa.dataset.id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -621,7 +621,7 @@ function abrirFormEditProced(nome) {
     }
     document.getElementById("categorias-button-adicionar").style.display = "none"
     document.getElementById("categorias-button-editar").style.display = "inline-block"
-    fetch('http://localhost:3030/procedimento', {
+    fetch(URLAPI + '/api/procedimento', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -715,7 +715,7 @@ function adicionarProcedimento() {
             },
             body: JSON.stringify(procedimento)
         };
-        fetch("http://localhost:3030/procedimento", options)
+        fetch(URLAPI + "/api/procedimento", options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao atualizar recurso');
@@ -785,7 +785,7 @@ function editarProcedimento() {
             },
             body: JSON.stringify(procedimento)
         };
-        fetch("http://localhost:3030/procedimento", options)
+        fetch(URLAPI + "/api/procedimento", options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao atualizar recurso');
@@ -830,7 +830,7 @@ function excluirProcedimento() {
         },
         body: JSON.stringify(nomeProc)
     };
-    fetch("http://localhost:3030/procedimento", options)
+    fetch(URLAPI + "/api/procedimento", options)
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -869,7 +869,7 @@ function barraCilios() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI + `/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -935,7 +935,7 @@ function barraMão() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI`/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -1001,7 +1001,7 @@ function barraSobrancelha() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI + `/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -1067,7 +1067,7 @@ function barraMakeup() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI`/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -1133,7 +1133,7 @@ function barraPé() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI + `/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -1200,7 +1200,7 @@ function barraOutros() {
 
         // Convertendo os parâmetros de filtro em uma string de consulta
         const queryString = new URLSearchParams(filtro).toString();
-        const url = `http://localhost:3030/procedimento/filtro?${queryString}`;
+        const url = URLAPI + `/api/procedimento/filtro?${queryString}`;
 
         const options = {
             method: 'GET',
@@ -1250,7 +1250,7 @@ function listarTodos() {
                 'Content-Type': 'application/json',
             },
         };
-        fetch("http://localhost:3030/empresa/todas", options)
+        fetch(URLAPI + "/api/empresa/todas", options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao consultar recurso');
@@ -1394,7 +1394,7 @@ function agendar(infos) {
     };
 
     // Verifica se o CNPJ está presente nos dados
-    fetch("http://localhost:3030/empresa/" + infos.dataset.cnpj, options)
+    fetch(URLAPI + "/api/empresa/" + infos.dataset.cnpj, options)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao atualizar recurso');
@@ -1442,7 +1442,7 @@ function agendar(infos) {
                         body: JSON.stringify(agendamentoData)
                     };
 
-                    fetch("http://localhost:3030/agendamento", options)
+                    fetch(URLAPI + "/api/agendamento", options)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao criar recurso');
@@ -1551,7 +1551,7 @@ const options = {
     },
 };
 
-fetch(`http://localhost:3030/agendamento/${id}`, options)
+fetch(URLAPI + `/api/agendamento/${id}`, options)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro ao consultar agendamento');
@@ -1601,7 +1601,7 @@ function exibirAgendamentosDoDia(dia) {
         },
     };
 
-    fetch(`http://localhost:3030/agendamento/${id}`, options)
+    fetch(URLAPI + `/api/agendamento/${id}`, options)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao criar recurso');
@@ -1658,7 +1658,7 @@ function exibirAgendamentosDoDia(dia) {
                         },
                     };
 
-                    fetch(`http://localhost:3030/clientes/${agendamento.id_cli}`, options2)
+                    fetch(URLAPI + `/api/clientes/${agendamento.id_cli}`, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consultar cliente');
@@ -1672,7 +1672,7 @@ function exibirAgendamentosDoDia(dia) {
                             console.error('Erro ao consultar cliente: ', error);
                         });
 
-                    fetch(`http://localhost:3030/procedimento/unico/${agendamento.id_pro}`, options2)
+                    fetch(URLAPI + `/api/procedimento/unico/${agendamento.id_pro}`, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consultar procedimento');
