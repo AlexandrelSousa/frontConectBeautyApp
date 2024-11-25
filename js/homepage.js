@@ -1268,7 +1268,7 @@ function listarTodos() {
                             document.getElementById("feed-empresas-linha-" + i + "-coluna-" + j).dataset.id = data[k].cnpj
                             document.getElementById("feed-empresas-coluna-nome-linha-" + i + "-coluna-" + j).innerHTML = data[k].nome
                             document.getElementById("feed-empresas-coluna-descricao-linha-" + i + "-coluna-" + j).innerHTML += data[k].descricao
-                            document.getElementById("feed-empresas-coluna-imagem-linha-" + i + "-coluna-" + j).style.backgroundImage = `${data[k].logo})`
+                            document.getElementById("feed-empresas-coluna-imagem-linha-" + i + "-coluna-" + j).style.backgroundImage = `url(${data[k].logo})`;
                         } else {
                             break;
                         }
