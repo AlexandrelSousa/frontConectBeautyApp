@@ -11,6 +11,9 @@ const URLAPI = "https://api-conect-beauty.vercel.app";
 let id = ""
 let url = ""
 let tipoDeUsuario = ""
+
+console.log("inhaaaaaaaaaaaaaaaaai" + tokenData.id)
+
 if (tokenData.id === undefined) {
     id = tokenData.cnpj
     console.log(id)
@@ -256,7 +259,7 @@ function empresaButton(empresa) {
     document.getElementById("perfil-box").style.display = "flex"
     document.getElementById("wrapper").style.display = "none"
 
-    fetch(URLAPI + '/api/empresa/' + empresa.dataset.id, {
+    fetch(URLAPI + '/api/empresa' + empresa.dataset.id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
