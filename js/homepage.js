@@ -469,14 +469,14 @@ function confirmarEdicao() {
         // Verifica se o usuário é uma empresa ou cliente
         if (tipoDeUsuario === "empresa") {
             let dias_func_var = [
-                document.getElementById("edit-dia-dom").checked ? 'Domingo' : '',
-                document.getElementById("edit-dia-seg").checked ? 'Segunda' : '',
-                document.getElementById("edit-dia-ter").checked ? 'Terça' : '',
-                document.getElementById("edit-dia-qua").checked ? 'Quarta' : '',
-                document.getElementById("edit-dia-qui").checked ? 'Quinta' : '',
-                document.getElementById("edit-dia-sex").checked ? 'Sexta' : '',
-                document.getElementById("edit-dia-sab").checked ? 'Sábado' : ''
-            ].filter(Boolean).join(', '); // Juntando os dias em uma string separada por vírgulas
+                document.getElementById("edit-dia-dom").checked,
+                document.getElementById("edit-dia-seg").checked,
+                document.getElementById("edit-dia-ter").checked,
+                document.getElementById("edit-dia-qua").checked,
+                document.getElementById("edit-dia-qui").checked,
+                document.getElementById("edit-dia-sex").checked,
+                document.getElementById("edit-dia-sab").checked
+            ]
 
             let horario_func = [
                 document.getElementById("edit-hora-abre").value,
