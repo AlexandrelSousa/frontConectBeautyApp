@@ -12,9 +12,7 @@ let id = ""
 let url = ""
 let tipoDeUsuario = ""
 
-console.log("inhaaaaaaaaaaaaaaaaai" + tokenData.id)
-
-if (tokenData.id === undefined) {
+if (tokenData.id === undefined || tokenData.id === null) {
     id = tokenData.cnpj
     console.log(id)
     url = `${URLAPI}/api/empresa`;
