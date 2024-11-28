@@ -7,7 +7,7 @@ let procedimentosComID = {
     nome: [],
     id: []
 }
-const URLAPI = "https://api-conect-beauty.vercel.app"; 
+const URLAPI = "https://api-conect-beauty.vercel.app";
 let id = ""
 let url = ""
 let tipoDeUsuario = ""
@@ -170,7 +170,7 @@ function perfilButton() {
                 'authorization': token
             }
         };
-        fetch( URLAPI + "/api/agendamento", options)
+        fetch(URLAPI + "/api/agendamento", options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao criar recurso');
@@ -224,7 +224,7 @@ function perfilButton() {
                         .catch(error => {
                             console.error('Erro ao consultar empresa ', error);
                         });
-                    fetch( URLAPI + "/api/procedimento/unico" + agendamento[i].id_pro, options2)
+                    fetch(URLAPI + "/api/procedimento/unico" + agendamento[i].id_pro, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consular recurso');
@@ -439,86 +439,116 @@ function editarPerfil() {
     }
 
 }
+
 function confirmarEdicao() {
     const userDataConfirm = {
         emailOuCNPJ: document.getElementById("edit-cnpj").value,
         senha: document.getElementById("pop-up-corfirm-edit-senha").value
     };
-    fetch(`${URLAPI}/api/empresa`, {
+
+    fetch(`${URLAPI}/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(userDataConfirm)
     })
-        .then(response => {
-            if (response.status === 400) {
-                throw new Error('Erro ao autenticar usuário: ' + response.statusText);
-            } else if (!response.ok) {
-                throw new Error('Erro ao autenticar usuário.' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Usuário autenticado com sucesso:', data);
-            let dataEdit = [];
-            if (tipoDeUsuario == "empresa") {
-                let dias_func_var = [document.getElementById("edit-dia-dom").checked, document.getElementById("edit-dia-seg").checked, document.getElementById("edit-dia-ter").checked, document.getElementById("edit-dia-qua").checked, document.getElementById("edit-dia-qui").checked, document.getElementById("edit-dia-sex").checked, document.getElementById("edit-dia-sab").checked,]
-                let horario_func = [document.getElementById("edit-hora-abre").value, document.getElementById("edit-hora-fecha").value]
-                dataEdit = {
-                    senha: document.getElementById("edit-senha").value,
-                    nome: document.getElementById("edit-nome").value,
-                    telefone: document.getElementById("edit-telefone").value,
-                    cidade: document.getElementById("edit-cidade").value,
-                    bairro: document.getElementById("edit-bairro").value,
-                    logradouro: document.getElementById("edit-logradouro").value,
-                    numero: document.getElementById("edit-numero").value,
-                    descricao: document.getElementById("edit-descricao").innerHTML,
-                    inicio_expediente: document.getElementById("edit-hora-abre").value,
-                    fim_expediente: document.getElementById("edit-hora-fecha").value,
-                    dias_func: dias_func_var
-                };
-            } else {
-                dataEdit = {
-                    nome: document.getElementById("edit-nome").value,
-                    senha: document.getElementById("edit-senha").value,
-                    telefone: document.getElementById("edit-telefone").value,
-                    id: id,
-                    email: document.getElementById("edit-cnpj").value
-                }
-            }
-            console.log(dataEdit)
-            // Configurações da requisição
-            const options = {
-                method: 'PUT', // Método HTTP PUT
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
-                },
-                body: JSON.stringify(dataEdit) // Converte os dados para JSON e os adiciona ao corpo da requisição
+    .then(response => {
+        if (response.status === 400) {
+            throw new Error('Erro ao autenticar usuário: ' + response.statusText);
+        } else if (!response.ok) {
+            throw new Error('Erro ao autenticar usuário.' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Usuário autenticado com sucesso:', data);
+
+        let dataEdit = {};
+
+        // Verifica se o usuário é uma empresa ou cliente
+        if (tipoDeUsuario === "empresa") {
+            let dias_func_var = [
+                document.getElementById("edit-dia-dom").checked ? 'Domingo' : '',
+                document.getElementById("edit-dia-seg").checked ? 'Segunda' : '',
+                document.getElementById("edit-dia-ter").checked ? 'Terça' : '',
+                document.getElementById("edit-dia-qua").checked ? 'Quarta' : '',
+                document.getElementById("edit-dia-qui").checked ? 'Quinta' : '',
+                document.getElementById("edit-dia-sex").checked ? 'Sexta' : '',
+                document.getElementById("edit-dia-sab").checked ? 'Sábado' : ''
+            ].filter(Boolean).join(', '); // Juntando os dias em uma string separada por vírgulas
+
+            let horario_func = [
+                document.getElementById("edit-hora-abre").value,
+                document.getElementById("edit-hora-fecha").value
+            ];
+
+            // Dados para a empresa
+            dataEdit = {
+                senha: document.getElementById("edit-senha").value,
+                nome: document.getElementById("edit-nome").value,
+                telefone: document.getElementById("edit-telefone").value,
+                cidade: document.getElementById("edit-cidade").value,
+                bairro: document.getElementById("edit-bairro").value,
+                logradouro: document.getElementById("edit-logradouro").value,
+                numero: document.getElementById("edit-numero").value,
+                descricao: document.getElementById("edit-descricao").innerHTML,
+                inicio_expediente: horario_func[0],
+                fim_expediente: horario_func[1],
+                dias_func: dias_func_var
             };
-            // Realiza a requisição PUT
-            fetch(`${URLAPI}/api/clientes`, options)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao atualizar recurso');
-                    }
-                    return response.json(); // Retorna os dados da resposta em formato JSON
-                })
-                .then(data => {
-                    console.log('Recurso atualizado com sucesso:', data);
-                    window.location.href = '../index.html';
-                })
-                .catch(error => {
-                    console.error('Erro durante a atualização do recurso:', error);
-                });
-        })
-        .catch(error => {
-            console.error('Erro durante a autenticação do usuário:', error.message);
-            document.getElementById("fundo-escuro-erro").style.display = "flex";
-            document.getElementById("fundo-escuro-erro-texto").innerHTML = ('Erro durante a autenticação: ' + error.message);
-        });
+
+            // Configuração da URL para a requisição de empresa
+            var endpoint = `${URLAPI}/api/empresa`;
+        } else {
+            // Dados para o cliente
+            dataEdit = {
+                nome: document.getElementById("edit-nome").value,
+                senha: document.getElementById("edit-senha").value,
+                telefone: document.getElementById("edit-telefone").value,
+                id: id,
+                email: document.getElementById("edit-cnpj").value
+            };
+
+            // Configuração da URL para a requisição de cliente
+            var endpoint = `${URLAPI}/api/clientes`;
+        }
+
+        console.log(dataEdit);
+
+        const options = {
+            method: 'PUT', // Método PUT para edição
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token // Certifique-se de que o token está correto
+            },
+            body: JSON.stringify(dataEdit) // Corpo da requisição com os dados para editar
+        };
+
+        // Realiza a requisição PUT para o endpoint apropriado
+        fetch(endpoint, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar recurso');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Recurso atualizado com sucesso:', data);
+                window.location.href = '../index.html'; // Redireciona após sucesso
+            })
+            .catch(error => {
+                console.error('Erro durante a atualização do recurso:', error);
+            });
+    })
+    .catch(error => {
+        console.error('Erro durante a autenticação do usuário:', error.message);
+        document.getElementById("fundo-escuro-erro").style.display = "flex";
+        document.getElementById("fundo-escuro-erro-texto").innerHTML = 'Erro durante a autenticação: ' + error.message;
+    });
 }
+
+
 
 function pesChange() {
     var CheckboxMãos = document.getElementById("checkbox-mãos");
@@ -1567,7 +1597,7 @@ fetch(URLAPI + `/api/agendamento/${id}`, options)
             var dataAgdo = new Date(agendamento.data);
             var diaAgdo = dataAgdo.getDate();
 
-            var lacunas = document.getElementsByName(diaAgdo.toString()); 
+            var lacunas = document.getElementsByName(diaAgdo.toString());
 
             for (var i = 0; i < lacunas.length; i++) {
                 console.log("Elemento " + i + ":", lacunas[i]);
