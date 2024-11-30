@@ -46,7 +46,6 @@ fetch(url, {
             document.getElementById("perfil-box-info-cidade").innerHTML = dataUser.cidade;
             document.getElementById("perfil-box-info-endereco").innerHTML = dataUser.logradouro + " - " + dataUser.bairro + ", " + dataUser.numero
             document.getElementById("perfil-box-info-funcionamento").innerHTML = "Aberto das " + dataUser.inicio_expediente.substring(0, 5) + " as " + dataUser.fim_expediente.substring(0, 5)
-            document.getElementById("perfil-box-info-botaoExcluir").style.display = "none";
             fetch(URLAPI + '/api/procedimento', {
                 method: 'GET',
                 headers: {
