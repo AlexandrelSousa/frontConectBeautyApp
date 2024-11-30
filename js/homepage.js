@@ -58,10 +58,10 @@ fetch(url, {
                     throw new Error('Erro ao buscar procedimentos');
                 }
                 return response.json();
-            })
-                .then(procedimentos => {
-                    const divBox = document.getElementById("perfil-box-procedimentos")
-                    const divProcedimentos = `
+            }).then(procedimentos => {
+                console.log("procedimentos: " + procedimentos)
+                const divBox = document.getElementById("perfil-box-procedimentos")
+                const divProcedimentos = `
                 <div class="perfil-box-procedimentos-procedimentos">
                     <div class="perfil-box-procedimentos-imagem" id="perfil-box-procedimentos-imagem">
                         <img id="perfil-box-procedimentos-image-img" src="../assets/cilios-icon.svg" alt="" width="80%" height= "min-content">
