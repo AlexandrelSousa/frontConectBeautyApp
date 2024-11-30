@@ -257,7 +257,7 @@ function empresaButton(empresa) {
     document.getElementById("perfil-box").style.display = "flex"
     document.getElementById("wrapper").style.display = "none"
 
-    fetch(URLAPI + '/api/empresa' + empresa.dataset.id, {
+    fetch(URLAPI + '/api/empresa/' + empresa.dataset.id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -466,7 +466,6 @@ function confirmarEdicao() {
 
         let dataEdit = {};
 
-        // Verifica se o usuário é uma empresa ou cliente
         if (tipoDeUsuario === "empresa") {
             let dias_func_var = [
                 document.getElementById("edit-dia-dom").checked,
