@@ -608,7 +608,6 @@ header img {
 
 .perfil-box-procedimentos-imagem {
     width: 25%;
-    height: 100%;
     background-color: var(--main-color3);
     display: flex;
     justify-content: center;
