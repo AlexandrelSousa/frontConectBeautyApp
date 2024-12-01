@@ -1444,6 +1444,7 @@ function agendar(infos) {
 
             if (data.dias_func[diaDaSemana]) {
                 // Verifica se o horário está no intervalo
+                console.log("hora: " + hora + "\ninicio expediente: " + data.inicio_expediente + "\nfim expediente: " + data.fim_expediente)
                 if (horarioEstaNoIntervalo(hora, data.inicio_expediente, data.fim_expediente)) {
                     var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss');
                     var hora2 = moment(hora, 'HH:mm');
