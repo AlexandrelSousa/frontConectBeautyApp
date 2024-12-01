@@ -1507,21 +1507,23 @@ function agendar(infos) {
 
 
 function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
-    // Converte os horários para objetos Date para facilitar a comparação
-    const iniIntDate = "2024-04-20T" + inicioIntervalo + ":00"
-    const fimIntDate = "2024-04-20T" + fimIntervalo + ":00"
-    const horarioIntDate = "2024-04-20T" + horario
-    //console.log(iniIntDate + "\n" + fimIntDate + "\n" + horarioIntDate)
+    const iniIntDate = `2024-04-20T${inicioIntervalo}`;
+    const fimIntDate = `2024-04-20T${fimIntervalo}`;
+    const horarioIntDate = `2024-04-20T${horario}`;
 
     const horarioDate = new Date(horarioIntDate);
     const inicioIntervaloDate = new Date(iniIntDate);
     const fimIntervaloDate = new Date(fimIntDate);
 
-    //console.log(horarioDate + "\n" + inicioIntervaloDate + "\n" + fimIntervaloDate)
+    console.log({
+        horario: horarioDate,
+        inicioIntervalo: inicioIntervaloDate,
+        fimIntervalo: fimIntervaloDate
+    });
 
-    // Verifica se o horário está dentro do intervalo
     return horarioDate >= inicioIntervaloDate && horarioDate <= fimIntervaloDate;
 }
+
 
 function buttonSair() {
     window.location.href = "../index.html";
