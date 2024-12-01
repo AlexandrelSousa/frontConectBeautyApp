@@ -1459,8 +1459,8 @@ function agendar(infos) {
                         id_pro: document.getElementById("agendamento-button").dataset.idpro,
                         cnpj: document.getElementById("agendamento-button").dataset.cnpj,
                         data: date.value,
-                        hora_inicio: hora + ":00+03:00",
-                        hora_fim: horaFormatada + "+03:00"
+                        hora_inicio: hora + ":00-03:00",
+                        hora_fim: horaFormatada + "-03:00"
                     };
                     console.log(agendamentoData);
 
