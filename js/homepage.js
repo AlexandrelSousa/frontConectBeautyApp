@@ -81,37 +81,37 @@ fetch(url, {
                     </div>
                 </div>
             </div>`
-                    console.log("tamanho do array: " + procedimentos.length + "\nProcedimentos: " + procedimentos)
-                    for (let i = 0; i < procedimentos.length; i++) {
-                        procedimentosComID.nome[i] = procedimentos[i].nome
-                        procedimentosComID.id[i] = procedimentos[i].id_pro
-                        divBox.innerHTML += divProcedimentos
-                        document.getElementById("perfil-box-procedimentos-titulo").id = 'perfil-box-procedimentos-titulo' + i
-                        document.getElementById("0").id = procedimentos[i].nome
-                        document.getElementById("btn0").id = "btn" + procedimentos[i].nome
-                        document.getElementById("perfil-box-procedimentos-preço").id = 'perfil-box-procedimentos-preço' + i
-                        document.getElementById("perfil-box-procedimentos-titulo" + i).innerHTML = procedimentos[i].nome
-                        document.getElementById("perfil-box-procedimentos-preço" + i).innerHTML = "R$ " + procedimentos[i].preco
+                console.log("tamanho do array: " + procedimentos.length + "\nProcedimentos: " + procedimentos)
+                for (let i = 0; i < procedimentos.length; i++) {
+                    procedimentosComID.nome[i] = procedimentos[i].nome
+                    procedimentosComID.id[i] = procedimentos[i].id_pro
+                    divBox.innerHTML += divProcedimentos
+                    document.getElementById("perfil-box-procedimentos-titulo").id = 'perfil-box-procedimentos-titulo' + i
+                    document.getElementById("0").id = procedimentos[i].nome
+                    document.getElementById("btn0").id = "btn" + procedimentos[i].nome
+                    document.getElementById("perfil-box-procedimentos-preço").id = 'perfil-box-procedimentos-preço' + i
+                    document.getElementById("perfil-box-procedimentos-titulo" + i).innerHTML = procedimentos[i].nome
+                    document.getElementById("perfil-box-procedimentos-preço" + i).innerHTML = "R$ " + procedimentos[i].preco
 
-                        document.getElementById("perfil-box-procedimentos-image-img").id = 'perfil-box-procedimentos-image-img' + i
+                    document.getElementById("perfil-box-procedimentos-image-img").id = 'perfil-box-procedimentos-image-img' + i
 
-                        if (procedimentos[i].categoria === "sobrancelha") {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/sobrancelha-icon.svg"
-                        } else if (procedimentos[i].categoria === "cilios") {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/cilios-icon.svg"
-                        } else if (procedimentos[i].categoria === "pés") {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/pé-icon.svg"
-                        } else if (procedimentos[i].categoria === "mãos") {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/mãos_icon.svg"
-                        } else if (procedimentos[i].categoria === "makeup") {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/makeup_icon.svg"
-                        } else {
-                            document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/outros-icon.svg"
-                        }
+                    if (procedimentos[i].categoria === "sobrancelha") {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/sobrancelha-icon.svg"
+                    } else if (procedimentos[i].categoria === "cilios") {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/cilios-icon.svg"
+                    } else if (procedimentos[i].categoria === "pés") {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/pé-icon.svg"
+                    } else if (procedimentos[i].categoria === "mãos") {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/mãos_icon.svg"
+                    } else if (procedimentos[i].categoria === "makeup") {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/makeup_icon.svg"
+                    } else {
+                        document.getElementById("perfil-box-procedimentos-image-img" + i).src = "../assets/outros-icon.svg"
                     }
-                }).catch(error => {
-                    console.error('Erro:', error);
-                });
+                }
+            }).catch(error => {
+                console.error('Erro:', error);
+            });
             let classificacao = (100 * dataUser.classificacao) / 5;
             if (classificacao >= 20) {
                 document.getElementById("perfil-box-info-avaliacoes-estrelas-1").style.backgroundColor = "#f7abc2"
@@ -452,98 +452,98 @@ function confirmarEdicao() {
         },
         body: JSON.stringify(userDataConfirm)
     })
-    .then(response => {
-        if (response.status === 400) {
-            throw new Error('Erro ao autenticar usuário: ' + response.statusText);
-        } else if (!response.ok) {
-            throw new Error('Erro ao autenticar usuário.' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Usuário autenticado com sucesso:', data);
+        .then(response => {
+            if (response.status === 400) {
+                throw new Error('Erro ao autenticar usuário: ' + response.statusText);
+            } else if (!response.ok) {
+                throw new Error('Erro ao autenticar usuário.' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Usuário autenticado com sucesso:', data);
 
-        let dataEdit = {};
+            let dataEdit = {};
 
-        if (tipoDeUsuario === "empresa") {
-            let dias_func_var = [
-                document.getElementById("edit-dia-dom").checked,
-                document.getElementById("edit-dia-seg").checked,
-                document.getElementById("edit-dia-ter").checked,
-                document.getElementById("edit-dia-qua").checked,
-                document.getElementById("edit-dia-qui").checked,
-                document.getElementById("edit-dia-sex").checked,
-                document.getElementById("edit-dia-sab").checked
-            ]
+            if (tipoDeUsuario === "empresa") {
+                let dias_func_var = [
+                    document.getElementById("edit-dia-dom").checked,
+                    document.getElementById("edit-dia-seg").checked,
+                    document.getElementById("edit-dia-ter").checked,
+                    document.getElementById("edit-dia-qua").checked,
+                    document.getElementById("edit-dia-qui").checked,
+                    document.getElementById("edit-dia-sex").checked,
+                    document.getElementById("edit-dia-sab").checked
+                ]
 
-            let horario_func = [
-                document.getElementById("edit-hora-abre").value,
-                document.getElementById("edit-hora-fecha").value
-            ];
+                let horario_func = [
+                    document.getElementById("edit-hora-abre").value,
+                    document.getElementById("edit-hora-fecha").value
+                ];
 
-            // Dados para a empresa
-            dataEdit = {
-                senha: document.getElementById("edit-senha").value,
-                nome: document.getElementById("edit-nome").value,
-                telefone: document.getElementById("edit-telefone").value,
-                cidade: document.getElementById("edit-cidade").value,
-                bairro: document.getElementById("edit-bairro").value,
-                logradouro: document.getElementById("edit-logradouro").value,
-                numero: document.getElementById("edit-numero").value,
-                descricao: document.getElementById("edit-descricao").innerHTML,
-                inicio_expediente: horario_func[0],
-                fim_expediente: horario_func[1],
-                dias_func: dias_func_var
+                // Dados para a empresa
+                dataEdit = {
+                    senha: document.getElementById("edit-senha").value,
+                    nome: document.getElementById("edit-nome").value,
+                    telefone: document.getElementById("edit-telefone").value,
+                    cidade: document.getElementById("edit-cidade").value,
+                    bairro: document.getElementById("edit-bairro").value,
+                    logradouro: document.getElementById("edit-logradouro").value,
+                    numero: document.getElementById("edit-numero").value,
+                    descricao: document.getElementById("edit-descricao").innerHTML,
+                    inicio_expediente: horario_func[0],
+                    fim_expediente: horario_func[1],
+                    dias_func: dias_func_var
+                };
+
+                // Configuração da URL para a requisição de empresa
+                var endpoint = `${URLAPI}/api/empresa`;
+            } else {
+                // Dados para o cliente
+                dataEdit = {
+                    nome: document.getElementById("edit-nome").value,
+                    senha: document.getElementById("edit-senha").value,
+                    telefone: document.getElementById("edit-telefone").value,
+                    id: id,
+                    email: document.getElementById("edit-cnpj").value
+                };
+
+                // Configuração da URL para a requisição de cliente
+                var endpoint = `${URLAPI}/api/clientes`;
+            }
+
+            console.log(dataEdit);
+
+            const options = {
+                method: 'PUT', // Método PUT para edição
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': token // Certifique-se de que o token está correto
+                },
+                body: JSON.stringify(dataEdit) // Corpo da requisição com os dados para editar
             };
 
-            // Configuração da URL para a requisição de empresa
-            var endpoint = `${URLAPI}/api/empresa`;
-        } else {
-            // Dados para o cliente
-            dataEdit = {
-                nome: document.getElementById("edit-nome").value,
-                senha: document.getElementById("edit-senha").value,
-                telefone: document.getElementById("edit-telefone").value,
-                id: id,
-                email: document.getElementById("edit-cnpj").value
-            };
-
-            // Configuração da URL para a requisição de cliente
-            var endpoint = `${URLAPI}/api/clientes`;
-        }
-
-        console.log(dataEdit);
-
-        const options = {
-            method: 'PUT', // Método PUT para edição
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': token // Certifique-se de que o token está correto
-            },
-            body: JSON.stringify(dataEdit) // Corpo da requisição com os dados para editar
-        };
-
-        // Realiza a requisição PUT para o endpoint apropriado
-        fetch(endpoint, options)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao atualizar recurso');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Recurso atualizado com sucesso:', data);
-                window.location.href = '../index.html'; // Redireciona após sucesso
-            })
-            .catch(error => {
-                console.error('Erro durante a atualização do recurso:', error);
-            });
-    })
-    .catch(error => {
-        console.error('Erro durante a autenticação do usuário:', error.message);
-        document.getElementById("fundo-escuro-erro").style.display = "flex";
-        document.getElementById("fundo-escuro-erro-texto").innerHTML = 'Erro durante a autenticação: ' + error.message;
-    });
+            // Realiza a requisição PUT para o endpoint apropriado
+            fetch(endpoint, options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao atualizar recurso');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Recurso atualizado com sucesso:', data);
+                    window.location.href = '../index.html'; // Redireciona após sucesso
+                })
+                .catch(error => {
+                    console.error('Erro durante a atualização do recurso:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Erro durante a autenticação do usuário:', error.message);
+            document.getElementById("fundo-escuro-erro").style.display = "flex";
+            document.getElementById("fundo-escuro-erro-texto").innerHTML = 'Erro durante a autenticação: ' + error.message;
+        });
 }
 
 
@@ -1445,13 +1445,14 @@ function agendar(infos) {
             if (data.dias_func[diaDaSemana]) {
                 // Verifica se o horário está no intervalo
                 if (horarioEstaNoIntervalo(hora, data.inicio_expediente, data.fim_expediente)) {
-                    var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss'); // Duração
-                    var hora2 = moment(hora, 'HH:mm'); // Hora do agendamento
+                    var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss');
+                    var hora2 = moment(hora, 'HH:mm');
                     var somaTotal = moment({}).startOf('day')
                         .add(hora1.hours(), 'hours')
                         .add(hora1.minutes(), 'minutes')
                         .add(hora2.hours(), 'hours')
                         .add(hora2.minutes(), 'minutes');
+
                     var horaFormatada = somaTotal.format('HH:mm:ss');
 
                     const agendamentoData = {
