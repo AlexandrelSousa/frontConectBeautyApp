@@ -1472,11 +1472,13 @@ function agendar(infos) {
                         },
                         body: JSON.stringify(agendamentoData)
                     };
-
                     fetch(URLAPI + "/api/agendamento", options)
                         .then(response => {
                             if (!response.ok) {
-                                throw new Error('Erro ao criar recurso');
+                                return response.json().then(err => {
+                                    console.error('Erro do servidor:', err); // Log detalhado do erro
+                                    throw new Error(err.error || 'Erro ao criar recurso'); 
+                                });
                             }
                             return response.json();
                         })
