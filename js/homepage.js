@@ -1704,7 +1704,10 @@ function exibirAgendamentosDoDia(dia) {
                                 </li>
                             </ul>
                         `
-                    const options2 = {
+                        document.getElementById(`cliente${agendamento.id_agdo}`).value = agendamento.cliente_nome;
+                        document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
+                        
+                    /*const options2 = {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -1741,7 +1744,7 @@ function exibirAgendamentosDoDia(dia) {
 
                     document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
                     document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
-                }
+                */}
             });
         })
         .catch(error => {
