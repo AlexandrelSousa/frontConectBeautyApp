@@ -1602,6 +1602,8 @@ function preencherCalendario() {
         console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
 
         agendamentos.forEach(agendamento => {
+            console.log("agendamento.data: " + agendamento.data)
+
             var dataAgdo = new Date(agendamento.data);
             
             console.log("data agdo: " + dataAgdo)
