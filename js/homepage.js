@@ -1594,8 +1594,8 @@ function preencherCalendario() {
 }
 
 // Chama a função para preencher o calendário ao carregar a página
-window.onload = preencherCalendario();
-window.onload = verificarAgendamentos();
+window.onload = preencherCalendario;
+window.onload = verificarAgendamentos;
 
 
 function verificarAgendamentos(){
