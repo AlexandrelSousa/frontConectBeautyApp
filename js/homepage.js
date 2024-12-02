@@ -1445,7 +1445,7 @@ function agendar(infos) {
             if (data.dias_func[diaDaSemana]) {
                 // Verifica se o horário está no intervalo
                 console.log("hora: " + hora + "\ninicio expediente: " + data.inicio_expediente + "\nfim expediente: " + data.fim_expediente)
-                if (horarioEstaNoIntervalo(hora, data.inicio_expediente, data.fim_expediente)) {
+                if (horarioEstaNoIntervalo(hora + ":00+00", data.inicio_expediente, data.fim_expediente)) {
                     var hora1 = moment(document.getElementById("agendamento-button").dataset.duracao, 'HH:mm:ss');
                     var hora2 = moment(hora, 'HH:mm');
                     var somaTotal = moment({}).startOf('day')
@@ -1460,8 +1460,8 @@ function agendar(infos) {
                         id_pro: document.getElementById("agendamento-button").dataset.idpro,
                         cnpj: document.getElementById("agendamento-button").dataset.cnpj,
                         data: date.value,
-                        hora_inicio: hora + ":00-00",
-                        hora_fim: horaFormatada + "-00"
+                        hora_inicio: hora + ":00+00",
+                        hora_fim: horaFormatada + "+00"
                     };
                     console.log(agendamentoData);
 
