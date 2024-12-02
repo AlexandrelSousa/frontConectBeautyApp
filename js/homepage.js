@@ -1603,6 +1603,9 @@ function preencherCalendario() {
 
         agendamentos.forEach(agendamento => {
             var dataAgdo = new Date(agendamento.data);
+            
+            console.log("data agdo: " + dataAgdo)
+
             var diaAgdo = dataAgdo.getDate();
             
             console.log("dia agdo: " + diaAgdo);
