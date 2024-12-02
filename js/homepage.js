@@ -1618,6 +1618,8 @@ fetch(URLAPI + `/api/agendamento/${id}`, options)
             var dataAgdo = new Date(agendamento.data);
             var diaAgdo = dataAgdo.getDate();
 
+            console.log("dia agdo: " + diaAgdo);
+
             var lacunas = document.getElementsByName("dia" + diaAgdo.toString());
             console.log("lacuna: " + lacunas[0])
             for (var i = 0; i < lacunas.length; i++) {
