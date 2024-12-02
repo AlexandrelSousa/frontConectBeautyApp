@@ -1669,6 +1669,7 @@ function exibirAgendamentosDoDia(dia) {
                         document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
                         document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
                         document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
+                        console.log(document.getElementById("dia" + diaAgendamento));
 
                     /*const options2 = {
                         method: 'GET',
@@ -1715,7 +1716,7 @@ function exibirAgendamentosDoDia(dia) {
         });
 }
 
-fetch(URLAPI + `/api/agendamento/${id}`, options)
+/*fetch(URLAPI + `/api/agendamento/${id}`, options)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro ao consultar agendamento');
@@ -1753,7 +1754,7 @@ fetch(URLAPI + `/api/agendamento/${id}`, options)
     })
     .catch(error => {
         console.error('Erro ao consultar agendamento: ', error);
-    });
+    });*/
 
 function fecharAgendamentosDoDia() {
     document.getElementById("fundoEscuro4").style.display = "none";
