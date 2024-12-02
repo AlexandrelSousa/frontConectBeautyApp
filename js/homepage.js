@@ -1514,20 +1514,22 @@ function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
         fim: fimIntervalo
     });
 
-    const iniIntDate = `2024-04-20T${inicioIntervalo}`;
-    const fimIntDate = `2024-04-20T${fimIntervalo}`;
-    const horarioIntDate = `2024-04-20T${horario}`;
+    const normalizeTime = (time) => time.replace(/(\+00|Z)/, 'Z');
 
-    console.log("Parsed Dates:");
+    const iniIntDate = `2024-04-20T${normalizeTime(inicioIntervalo)}`;
+    const fimIntDate = `2024-04-20T${normalizeTime(fimIntervalo)}`;
+    const horarioIntDate = `2024-04-20T${normalizeTime(horario)}`;
+
+    console.log("Normalized Dates:");
     console.log({
-        iniIntDate: Date.parse(iniIntDate),
-        fimIntDate: Date.parse(fimIntDate),
-        horarioIntDate: Date.parse(horarioIntDate)
+        iniIntDate: iniIntDate,
+        fimIntDate: fimIntDate,
+        horarioIntDate: horarioIntDate
     });
 
-    const horarioDate = new Date(Date.parse(horarioIntDate));
-    const inicioIntervaloDate = new Date(Date.parse(iniIntDate));
-    const fimIntervaloDate = new Date(Date.parse(fimIntDate));
+    const horarioDate = new Date(horarioIntDate);
+    const inicioIntervaloDate = new Date(iniIntDate);
+    const fimIntervaloDate = new Date(fimIntDate);
 
     console.log({
         horarioDate,
@@ -1537,6 +1539,7 @@ function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
 
     return horarioDate >= inicioIntervaloDate && horarioDate <= fimIntervaloDate;
 }
+
 
 
 
