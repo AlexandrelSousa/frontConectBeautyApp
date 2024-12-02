@@ -1617,10 +1617,10 @@ fetch(URLAPI + `/api/agendamento/${id}`, options)
         agendamentos.forEach(agendamento => {
             var dataAgdo = new Date(agendamento.data);
             var diaAgdo = dataAgdo.getDate();
-
+            
             console.log("dia agdo: " + diaAgdo);
 
-            var lacunas = document.getElementsByName("dia" + diaAgdo.toString());
+            var lacunas = document.getElementsByName(diaAgdo.toString());
             console.log("lacuna: " + lacunas[0])
             for (var i = 0; i < lacunas.length; i++) {
                 console.log("Elemento " + i + ":", lacunas[i]);
