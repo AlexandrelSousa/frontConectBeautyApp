@@ -1673,6 +1673,7 @@ function exibirAgendamentosDoDia(dia) {
                 let dataAgendamento = agendamento.data;
                 let mesAgendamento = dataAgendamento.substring(5, 7);
                 let anoAgendamento = dataAgendamento.substring(0, 4);
+                let diaAgendamento = dataAgendamento.substring(8, 10)
                 console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento)
                 console.log("dia: " + dia + "\ndocumento pelo id: " + document.getElementById(dia).innerHTML)
                 if (mesAgendamento === mesAtual && anoAgendamento === anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
