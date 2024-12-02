@@ -1667,7 +1667,7 @@ function exibirAgendamentosDoDia(dia) {
             console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
 
             const agora = new Date();
-            const mesAtual = agora.getMonth();
+            const mesAtual = agora.getMonth() + 1;
             const anoAtual = agora.getFullYear();
             agendamentos.forEach(agendamento => {
                 const dataAgendamento = agendamento.data;
