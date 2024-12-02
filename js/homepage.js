@@ -1619,9 +1619,10 @@ fetch(URLAPI + `/api/agendamento/${id}`, options)
             var diaAgdo = dataAgdo.getDate();
             
             console.log("dia agdo: " + diaAgdo);
-
-            var lacunas = document.getElementsByName(diaAgdo.toString());
-            console.log("lacuna: " + lacunas[0])
+            document.addEventListener('DOMContentLoaded', function() {
+                var lacunas = document.getElementsByName(diaAgdo.toString());
+                console.log("lacuna: " + lacunas[0]);
+            });
             for (var i = 0; i < lacunas.length; i++) {
                 console.log("Elemento " + i + ":", lacunas[i]);
                 if (lacunas[i]) {
