@@ -1594,60 +1594,12 @@ function preencherCalendario() {
 }
 
 // Chama a função para preencher o calendário ao carregar a página
-window.onload = preencherCalendario;
-
-const options = {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'authorization': token
-    },
-};
-
-fetch(URLAPI + `/api/agendamento/${id}`, options)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao consultar agendamento');
-        }
-        return response.json();
-    })
-    .then(agendamentos => {
-        console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
-
-        agendamentos.forEach(agendamento => {
-            var dataAgdo = new Date(agendamento.data);
-            var diaAgdo = dataAgdo.getDate();
-            
-            console.log("dia agdo: " + diaAgdo);
-
-            var lacunas = document.getElementsByName(diaAgdo.toString());
-            console.log("lacuna: " + lacunas[0])
-            for (var i = 0; i < lacunas.length; i++) {
-                console.log("Elemento " + i + ":", lacunas[i]);
-                if (lacunas[i]) {
-                    lacunas[i].style.textDecoration = "underline";
-                    lacunas[i].style.color = "#f7abc2";
-                } else {
-                    console.warn('Elemento no índice ' + i + ' é undefined');
-                }
-            }
-
-            if (lacunas.length > 0) {
-                lacunas[0].style.textDecoration = "underline";
-            } else {
-                console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
-            }
-        });
-    })
-    .catch(error => {
-        console.error('Erro ao consultar agendamento: ', error);
-    });
+window.onload = preencherCalendario();
+window.onload = verificarAgendamentos();
 
 
+function verificarAgendamentos(){
 
-function exibirAgendamentosDoDia(dia) {
-    document.getElementById("fundoEscuro4").style.display = "flex";
-    document.getElementById("data-agenda").innerHTML = "Data: " + dia; // Exibir a data selecionada no modal
     const options = {
         method: 'GET',
         headers: {
@@ -1655,105 +1607,158 @@ function exibirAgendamentosDoDia(dia) {
             'authorization': token
         },
     };
-
+    
     fetch(URLAPI + `/api/agendamento/${id}`, options)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Erro ao criar recurso');
+                throw new Error('Erro ao consultar agendamento');
             }
             return response.json();
         })
         .then(agendamentos => {
-
             console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
-
-            const agora = new Date();
-            const mesAtual = agora.getMonth();
-            const anoAtual = agora.getFullYear();
+    
             agendamentos.forEach(agendamento => {
-                const dataAgendamento = new Date(agendamento.data);
-                const mesAgendamento = dataAgendamento.getMonth();
-                const anoAgendamento = dataAgendamento.getFullYear();
-                const diaAgendamento = dataAgendamento.getDate();
-                console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\ndia atual: " + document.getElementById(dia).innerHTML + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento + "\ndia agendamento: " + diaAgendamento)
-                if (mesAgendamento === mesAtual && anoAgendamento === anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
-                    console.log("teste")
-                    document.getElementById("lista-agendamentos").innerHTML += `
-                            <ul id="agendamentos-lista" class="agendamentos-lista">
-                                <li>
-                                    <label for="cliente1">Nome do Cliente</label>
-                                </li>
-                                <li>
-                                    <input type="text" id="cliente${agendamento.id_agdo}" name="cliente1" disabled>
-                                </li>
-                                <li>
-                                    <label for="procedimento1">Procedimento:</label>
-                                </li>
-                                <li>
-                                    <input type="text" id="procedimento${agendamento.id_agdo}" name="procedimento1" disabled>
-                                </li>
-                                <li>
-                                    <label for="data1">Data:</label>
-                                </li>
-                                <li>
-                                    <input type="date" id="data${agendamento.id_agdo}" name="data1" disabled>
-                                </li>
-                                <li>
-                                    <label for="hora1">Hora Marcada:</label>
-                                </li>
-                                <li>
-                                    <input type="time" id="hora${agendamento.id_agdo}" name="hora1" disabled>
-                                </li>
-                            </ul>
-                        `
-                        document.getElementById(`cliente${agendamento.id_agdo}`).value = agendamento.cliente_nome;
-                        document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
-                        document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
-                        document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
-
-                    /*const options2 = {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    };
-
-                    fetch(URLAPI + `/api/clientes/${agendamento.id_cli}`, options2)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Erro ao consultar cliente');
-                            }
-                            return response.json();
-                        })
-                        .then(cliente => {
-                            document.getElementById(`cliente${agendamento.id_agdo}`).value = cliente.nome;
-                        })
-                        .catch(error => {
-                            console.error('Erro ao consultar cliente: ', error);
-                        });
-
-                    fetch(URLAPI + `/api/procedimento/unico/${agendamento.id_pro}`, options2)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Erro ao consultar procedimento');
-                            }
-                            return response.json();
-                        })
-                        .then(procedimento => {
-                            document.getElementById(`procedimento${agendamento.id_agdo}`).value = procedimento.nome;
-                        })
-                        .catch(error => {
-                            console.error('Erro ao consultar procedimento: ', error);
-                        });
-
-                    document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
-                    document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
-                */}
+                var dataAgdo = new Date(agendamento.data);
+                var diaAgdo = dataAgdo.getDate();
+                
+                console.log("dia agdo: " + diaAgdo);
+    
+                var lacunas = document.getElementsByName(diaAgdo.toString());
+                console.log("lacuna: " + lacunas[0])
+                for (var i = 0; i < lacunas.length; i++) {
+                    console.log("Elemento " + i + ":", lacunas[i]);
+                    if (lacunas[i]) {
+                        lacunas[i].style.textDecoration = "underline";
+                        lacunas[i].style.color = "#f7abc2";
+                    } else {
+                        console.warn('Elemento no índice ' + i + ' é undefined');
+                    }
+                }
+    
+                if (lacunas.length > 0) {
+                    lacunas[0].style.textDecoration = "underline";
+                } else {
+                    console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
+                }
             });
         })
         .catch(error => {
             console.error('Erro ao consultar agendamento: ', error);
         });
+    
+    
+    
+    function exibirAgendamentosDoDia(dia) {
+        document.getElementById("fundoEscuro4").style.display = "flex";
+        document.getElementById("data-agenda").innerHTML = "Data: " + dia; // Exibir a data selecionada no modal
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': token
+            },
+        };
+    
+        fetch(URLAPI + `/api/agendamento/${id}`, options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao criar recurso');
+                }
+                return response.json();
+            })
+            .then(agendamentos => {
+    
+                console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
+    
+                const agora = new Date();
+                const mesAtual = agora.getMonth();
+                const anoAtual = agora.getFullYear();
+                agendamentos.forEach(agendamento => {
+                    const dataAgendamento = new Date(agendamento.data);
+                    const mesAgendamento = dataAgendamento.getMonth();
+                    const anoAgendamento = dataAgendamento.getFullYear();
+                    const diaAgendamento = dataAgendamento.getDate();
+                    console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\ndia atual: " + document.getElementById(dia).innerHTML + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento + "\ndia agendamento: " + diaAgendamento)
+                    if (mesAgendamento === mesAtual && anoAgendamento === anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
+                        console.log("teste")
+                        document.getElementById("lista-agendamentos").innerHTML += `
+                                <ul id="agendamentos-lista" class="agendamentos-lista">
+                                    <li>
+                                        <label for="cliente1">Nome do Cliente</label>
+                                    </li>
+                                    <li>
+                                        <input type="text" id="cliente${agendamento.id_agdo}" name="cliente1" disabled>
+                                    </li>
+                                    <li>
+                                        <label for="procedimento1">Procedimento:</label>
+                                    </li>
+                                    <li>
+                                        <input type="text" id="procedimento${agendamento.id_agdo}" name="procedimento1" disabled>
+                                    </li>
+                                    <li>
+                                        <label for="data1">Data:</label>
+                                    </li>
+                                    <li>
+                                        <input type="date" id="data${agendamento.id_agdo}" name="data1" disabled>
+                                    </li>
+                                    <li>
+                                        <label for="hora1">Hora Marcada:</label>
+                                    </li>
+                                    <li>
+                                        <input type="time" id="hora${agendamento.id_agdo}" name="hora1" disabled>
+                                    </li>
+                                </ul>
+                            `
+                            document.getElementById(`cliente${agendamento.id_agdo}`).value = agendamento.cliente_nome;
+                            document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
+                            document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
+                            document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
+    
+                        /*const options2 = {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        };
+    
+                        fetch(URLAPI + `/api/clientes/${agendamento.id_cli}`, options2)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Erro ao consultar cliente');
+                                }
+                                return response.json();
+                            })
+                            .then(cliente => {
+                                document.getElementById(`cliente${agendamento.id_agdo}`).value = cliente.nome;
+                            })
+                            .catch(error => {
+                                console.error('Erro ao consultar cliente: ', error);
+                            });
+    
+                        fetch(URLAPI + `/api/procedimento/unico/${agendamento.id_pro}`, options2)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Erro ao consultar procedimento');
+                                }
+                                return response.json();
+                            })
+                            .then(procedimento => {
+                                document.getElementById(`procedimento${agendamento.id_agdo}`).value = procedimento.nome;
+                            })
+                            .catch(error => {
+                                console.error('Erro ao consultar procedimento: ', error);
+                            });
+    
+                        document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
+                        document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
+                    */}
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao consultar agendamento: ', error);
+            });
+    }
 }
 
 
