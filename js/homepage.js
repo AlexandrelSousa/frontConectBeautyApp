@@ -1513,23 +1513,31 @@ function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
         inicio: inicioIntervalo,
         fim: fimIntervalo
     });
-    
+
     const iniIntDate = `2024-04-20T${inicioIntervalo}`;
     const fimIntDate = `2024-04-20T${fimIntervalo}`;
     const horarioIntDate = `2024-04-20T${horario}`;
 
-    const horarioDate = new Date(horarioIntDate);
-    const inicioIntervaloDate = new Date(iniIntDate);
-    const fimIntervaloDate = new Date(fimIntDate);
+    console.log("Parsed Dates:");
+    console.log({
+        iniIntDate: Date.parse(iniIntDate),
+        fimIntDate: Date.parse(fimIntDate),
+        horarioIntDate: Date.parse(horarioIntDate)
+    });
+
+    const horarioDate = new Date(Date.parse(horarioIntDate));
+    const inicioIntervaloDate = new Date(Date.parse(iniIntDate));
+    const fimIntervaloDate = new Date(Date.parse(fimIntDate));
 
     console.log({
-        horario: horarioDate,
-        inicioIntervalo: inicioIntervaloDate,
-        fimIntervalo: fimIntervaloDate
+        horarioDate,
+        inicioIntervaloDate,
+        fimIntervaloDate
     });
 
     return horarioDate >= inicioIntervaloDate && horarioDate <= fimIntervaloDate;
 }
+
 
 
 function buttonSair() {
