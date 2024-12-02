@@ -1604,7 +1604,7 @@ function preencherCalendario() {
         agendamentos.forEach(agendamento => {
             console.log("agendamento.data: " + agendamento.data)
 
-            var diaAgdo = agendamento.data.subString(8, 2);
+            var diaAgdo = agendamento.data.substring(8, 2);
             
             console.log("dia agdo: " + diaAgdo);
 
