@@ -1508,6 +1508,12 @@ function agendar(infos) {
 
 
 function horarioEstaNoIntervalo(horario, inicioIntervalo, fimIntervalo) {
+    console.log({
+        horario: horario,
+        inicio: inicioIntervalo,
+        fim: fimIntervalo
+    });
+    
     const iniIntDate = `2024-04-20T${inicioIntervalo}`;
     const fimIntDate = `2024-04-20T${fimIntervalo}`;
     const horarioIntDate = `2024-04-20T${horario}`;
