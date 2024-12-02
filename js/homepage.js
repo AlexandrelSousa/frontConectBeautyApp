@@ -1666,14 +1666,14 @@ function exibirAgendamentosDoDia(dia) {
 
             console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
 
-            const agora = new Date();
-            const mesAtual = agora.getMonth() + 1;
-            const anoAtual = agora.getFullYear();
+            let agora = new Date();
+            let mesAtual = agora.getMonth() + 1;
+            let anoAtual = agora.getFullYear();
             agendamentos.forEach(agendamento => {
-                const dataAgendamento = agendamento.data;
-                const mesAgendamento = dataAgendamento.substring(5, 7);
-                const anoAgendamento = dataAgendamento.substring(0, 4);
-                const diaAgendamento = dataAgendamento.substring(8, 10);
+                let dataAgendamento = agendamento.data;
+                let mesAgendamento = dataAgendamento.substring(5, 7);
+                let anoAgendamento = dataAgendamento.substring(0, 4);
+                let diaAgendamento = dataAgendamento.substring(8, 10);
                 console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\ndia atual: " + document.getElementById(dia).innerHTML + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento + "\ndia agendamento: " + diaAgendamento)
                 if (mesAgendamento === mesAtual && anoAgendamento === anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
                     console.log("teste")
