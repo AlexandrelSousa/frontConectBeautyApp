@@ -1708,7 +1708,7 @@ function exibirAgendamentosDoDia(dia) {
                         `
                         document.getElementById(`cliente${agendamento.id_agdo}`).value = agendamento.cliente_nome;
                         document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
-                        document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
+                        document.getElementById(`data${agendamento.id_agdo}`).value = agendamento.data.substring(0, 10);
                         document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
                         
 
