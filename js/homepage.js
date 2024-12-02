@@ -1604,48 +1604,6 @@ const options = {
     },
 };
 
-fetch(URLAPI + `/api/agendamento/${id}`, options)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao consultar agendamento');
-        }
-        return response.json();
-    })
-    .then(agendamentos => {
-        console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
-
-        agendamentos.forEach(agendamento => {
-            var dataAgdo = new Date(agendamento.data);
-            var diaAgdo = dataAgdo.getDate();
-            
-            console.log("dia agdo: " + diaAgdo);
-
-            var lacunas = document.getElementsByName(diaAgdo.toString());
-            console.log("lacuna: " + lacunas)
-            
-            for (var i = 0; i < lacunas.length; i++) {
-                console.log("Elemento " + i + ":", lacunas[i]);
-                if (lacunas[i]) {
-                    lacunas[i].style.textDecoration = "underline";
-                    lacunas[i].style.color = "#f7abc2";
-                } else {
-                    console.warn('Elemento no índice ' + i + ' é undefined');
-                }
-            }
-
-            if (lacunas.length > 0) {
-                lacunas[0].style.textDecoration = "underline";
-            } else {
-                console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
-            }
-        });
-    })
-    .catch(error => {
-        console.error('Erro ao consultar agendamento: ', error);
-    });
-
-
-
 function exibirAgendamentosDoDia(dia) {
     document.getElementById("fundoEscuro4").style.display = "flex";
     document.getElementById("data-agenda").innerHTML = "Data: " + dia; // Exibir a data selecionada no modal
@@ -1757,6 +1715,45 @@ function exibirAgendamentosDoDia(dia) {
         });
 }
 
+fetch(URLAPI + `/api/agendamento/${id}`, options)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao consultar agendamento');
+        }
+        return response.json();
+    })
+    .then(agendamentos => {
+        console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
+
+        agendamentos.forEach(agendamento => {
+            var dataAgdo = new Date(agendamento.data);
+            var diaAgdo = dataAgdo.getDate();
+            
+            console.log("dia agdo: " + diaAgdo);
+
+            var lacunas = document.getElementsByName(diaAgdo.toString());
+            console.log("lacuna: " + lacunas)
+
+            for (var i = 0; i < lacunas.length; i++) {
+                console.log("Elemento " + i + ":", lacunas[i]);
+                if (lacunas[i]) {
+                    lacunas[i].style.textDecoration = "underline";
+                    lacunas[i].style.color = "#f7abc2";
+                } else {
+                    console.warn('Elemento no índice ' + i + ' é undefined');
+                }
+            }
+
+            if (lacunas.length > 0) {
+                lacunas[0].style.textDecoration = "underline";
+            } else {
+                console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao consultar agendamento: ', error);
+    });
 
 function fecharAgendamentosDoDia() {
     document.getElementById("fundoEscuro4").style.display = "none";
