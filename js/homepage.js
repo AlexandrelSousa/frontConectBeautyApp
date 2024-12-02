@@ -1669,7 +1669,7 @@ function exibirAgendamentosDoDia(dia) {
                         document.getElementById(`procedimento${agendamento.id_agdo}`).value = agendamento.procedimento_nome;
                         document.getElementById(`data${agendamento.id_agdo}`).value = formatarData(agendamento.data);
                         document.getElementById(`hora${agendamento.id_agdo}`).value = agendamento.hora_inicio.substring(0, 5);
-                        console.log(document.getElementById("dia" + diaAgendamento));
+                        console.log("dia" + diaAgendamento);
 
                     /*const options2 = {
                         method: 'GET',
