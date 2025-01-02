@@ -259,7 +259,7 @@ function empresaButton(empresa) {
     fetch(URLAPI + '/api/empresa/' + empresa.dataset.id, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json', 
             'authorization': token,
         },
     }).then(response => {
@@ -1359,6 +1359,7 @@ function buttonProcedimentos() {
     document.getElementById("perfil-box-avaliações").style.display = "none"
     document.getElementById("perfil-box-informações").style.display = "none"
 }
+
 function buttonAvaliacoes() {
     document.getElementById("perfil-box-menu-point-procedimentos").style.backgroundColor = "#fff"
     document.getElementById("perfil-box-menu-point-avaliacoes").style.backgroundColor = "#f7abc2"
