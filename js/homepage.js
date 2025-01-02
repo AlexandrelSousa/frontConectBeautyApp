@@ -1606,9 +1606,14 @@ function preencherCalendario() {
             console.log("agendamento.data: " + agendamento.data)
 
             var diaAgdo = agendamento.data.substring(8, 10);
-            
+            var mesAgdo = agendamento.data.substring(5, 7);
+            var anoAgdo = agendamento.data.substring(0, 4);
+
             console.log("dia agdo: " + diaAgdo);
 
+            if(mesAgdo == hoje.getMonth()){
+                console.log("ESSE AGDO É BABADO")
+            }
             var lacunas = document.getElementsByName(diaAgdo.toString());
             console.log("lacuna: " + lacunas[0])
 
