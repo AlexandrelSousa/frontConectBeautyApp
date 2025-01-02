@@ -1677,7 +1677,7 @@ function exibirAgendamentosDoDia(dia) {
                 let diaAgendamento = dataAgendamento.substring(8, 10)
                 console.log("ano atual: " + anoAtual + "\nmes atual: " + mesAtual + "\nano agendamento: " + anoAgendamento + "\nmes agendamento: " + mesAgendamento + "\ndia clicado: " + document.getElementById(dia).innerHTML + "\ndia do agendamento: " + diaAgendamento)
                 console.log("dia: " + dia + "\ndocumento pelo id: " + document.getElementById(dia).innerHTML)
-                if (mesAgendamento == mesAtual && anoAgendamento == anoAtual && diaAgendamento == document.getElementById(dia).innerHTML) {
+                if (mesAgendamento == mesAtual && anoAgendamento == anoAtual && diaAgendamento == document.getElementById(dia).getAttribute('name')) {
                     console.log("teste")
                     document.getElementById("lista-agendamentos").innerHTML += `
                             <ul id="agendamentos-lista" class="agendamentos-lista">
