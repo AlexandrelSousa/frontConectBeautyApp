@@ -1606,10 +1606,10 @@ function preencherCalendario() {
             console.log("agendamento.data: " + agendamento.data)
 
             var diaAgdo = agendamento.data.substring(8, 10);
-            var mesAgdo = agendamento.data.substring(5, 7);
+            var mesAgdo = agendamento.data.substring(6, 7);
             var anoAgdo = agendamento.data.substring(0, 4);
 
-            var mesAtual = new Date().getMonth();
+            var mesAtual = new Date().getMonth() + 1;
             var anoAtual = new Date().getFullYear();
 
             console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual + "\nmes atual: " + mesAtual);
