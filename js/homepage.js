@@ -1618,7 +1618,7 @@ function preencherCalendario() {
             var mesAtual = dataAtual.getMonth();
             var anoAtual = dataAtual.getFullYear();
 
-            console.log(parseInt(mesAgdo, 10));
+            console.log(parseInt(mesAgdo, 10) + "\n" + dataAtual.getDate());
 
             if (parseInt(mesAgdo, 10) === mesAtual && diaAgdo == dataAtual.getDate()) {
                 document.getElementByName(diaAgdo).style.textDecoration = "underline";
