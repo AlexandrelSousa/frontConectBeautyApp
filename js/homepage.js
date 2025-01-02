@@ -1618,12 +1618,13 @@ function preencherCalendario() {
             var mesAtual = dataAtual.getMonth();
             var anoAtual = dataAtual.getFullYear();
 
-                if (mesAgdo == mesAtual && diaAgdo == dataAtual.getDate()) {
-                    document.getElementByName(diaAgdo).style.textDecoration = "underline";
-                    document.getElementByName(diaAgdo).style.color = "#f7abc2";
-                } else {
-                    console.warn('Elemento no índice é undefined');
-                }
+            if (parseInt(mesAgdo, 10) === mesAtual && diaAgdo == dataAtual.getDate()) {
+                document.getElementByName(diaAgdo).style.textDecoration = "underline";
+                document.getElementByName(diaAgdo).style.color = "#f7abc2";
+            } else {
+                console.warn('Elemento no índice é undefined');
+            }
+            
         });
     })
     .catch(error => {
