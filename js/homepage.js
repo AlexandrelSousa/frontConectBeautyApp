@@ -1612,7 +1612,7 @@ function preencherCalendario() {
             var mesAtual = new Date().getMonth();
             var anoAtual = new Date().getFullYear();
 
-            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual());
+            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual);
 
             if(mesAgdo == mesAtual()){
                 console.log("ESSE AGDO É BABADO")
