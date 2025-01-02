@@ -1612,13 +1612,10 @@ function preencherCalendario() {
             var mesAtual = new Date().getMonth();
             var anoAtual = new Date().getFullYear();
 
-            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual);
+            console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual);
 
-            if(mesAgdo == mesAtual()){
-                console.log("ESSE AGDO É BABADO")
-            }
-            var lacunas = document.getElementsByName(diaAgdo.toString());
-            console.log("lacuna: " + lacunas[0])
+            var lacunas = document.getElementsByName(diaAgdo);
+            console.log("lacuna: " + lacunas)
 
             var dataAtual = new Date();
             var mesAtual = dataAtual.getMonth();
