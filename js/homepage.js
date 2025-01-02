@@ -1647,7 +1647,7 @@ const options = {
 
 function exibirAgendamentosDoDia(dia) {
     document.getElementById("fundoEscuro4").style.display = "flex";
-    document.getElementById("data-agenda").innerHTML = "Data: " + document.getElementById(dia).name; // Exibir a data selecionada no modal
+    document.getElementById("data-agenda").innerHTML = "Data: " + document.getElementById(dia).getAttribute('name'); // Exibir a data selecionada no modal
     const options = {
         method: 'GET',
         headers: {
