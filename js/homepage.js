@@ -1612,7 +1612,7 @@ function preencherCalendario() {
             var mesAtual = new Date().getMonth();
             var anoAtual = new Date().getFullYear();
 
-            console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual);
+            console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual + "\nmes atual: " + mesAtual);
 
             if(mesAgdo === mesAtual){
                 var lacunas = document.getElementsByName(diaAgdo);
