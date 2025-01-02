@@ -1609,9 +1609,12 @@ function preencherCalendario() {
             var mesAgdo = agendamento.data.substring(5, 7);
             var anoAgdo = agendamento.data.substring(0, 4);
 
-            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + hoje.getMonth());
+            var mesAtual = new Date().getMonth();
+            var anoAtual = new Date().getFullYear();
 
-            if(mesAgdo == hoje.getMonth()){
+            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual());
+
+            if(mesAgdo == mesAtual()){
                 console.log("ESSE AGDO É BABADO")
             }
             var lacunas = document.getElementsByName(diaAgdo.toString());
