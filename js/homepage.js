@@ -1614,7 +1614,9 @@ function preencherCalendario() {
 
             console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual);
 
-            var lacunas = document.getElementsByName(diaAgdo);
+            if(mesAgdo === mesAtual){
+                var lacunas = document.getElementsByName(diaAgdo);
+            }
             console.log("lacuna: " + lacunas)
 
             var dataAtual = new Date();
