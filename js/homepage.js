@@ -1606,7 +1606,7 @@ function preencherCalendario() {
             console.log("agendamento.data: " + agendamento.data)
 
             var diaAgdo = agendamento.data.substring(8, 10);
-            var mesAgdo = agendamento.data.substring(6, 7);
+            var mesAgdo = agendamento.data.substring(5, 7);
             var anoAgdo = agendamento.data.substring(0, 4);
 
             var mesAtual = new Date().getMonth() + 1;
@@ -1614,24 +1614,16 @@ function preencherCalendario() {
 
             console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual + "\nmes atual: " + mesAtual);
 
-            if(mesAgdo === mesAtual){
-                var lacunas = document.getElementsByName(diaAgdo);
-            }
-            console.log("lacuna: " + lacunas)
-
             var dataAtual = new Date();
             var mesAtual = dataAtual.getMonth();
             var anoAtual = dataAtual.getFullYear();
 
-            for (var i = 0; i < lacunas.length; i++) {
-                console.log("Elemento " + i + ":", lacunas[i]);
-                if (lacunas[i]) {
+                if (mesAgdo == mesAtual && diaAgdo == dataAtual.getDate()) {
                     lacunas[i].style.textDecoration = "underline";
                     lacunas[i].style.color = "#f7abc2";
                 } else {
                     console.warn('Elemento no índice ' + i + ' é undefined');
                 }
-            }
 
             if (lacunas.length > 0) {
                 lacunas[0].style.textDecoration = "underline";
