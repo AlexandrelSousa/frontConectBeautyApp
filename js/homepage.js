@@ -1609,7 +1609,7 @@ function preencherCalendario() {
             var mesAgdo = agendamento.data.substring(5, 7);
             var anoAgdo = agendamento.data.substring(0, 4);
 
-            console.log("dia agdo: " + diaAgdo);
+            console.log("dia agdo: " + diaAgdo + "\n mes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + hoje.getMonth());
 
             if(mesAgdo == hoje.getMonth()){
                 console.log("ESSE AGDO É BABADO")
