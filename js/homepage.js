@@ -1619,8 +1619,8 @@ function preencherCalendario() {
             var anoAtual = dataAtual.getFullYear();
 
                 if (mesAgdo == mesAtual && diaAgdo == dataAtual.getDate()) {
-                    lacunas[i].style.textDecoration = "underline";
-                    lacunas[i].style.color = "#f7abc2";
+                    document.getElementByName(diaAgdo).style.textDecoration = "underline";
+                    document.getElementByName(diaAgdo).style.color = "#f7abc2";
                 } else {
                     console.warn('Elemento no índice ' + i + ' é undefined');
                 }
