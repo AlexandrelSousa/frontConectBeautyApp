@@ -1622,7 +1622,7 @@ function preencherCalendario() {
                     document.getElementByName(diaAgdo).style.textDecoration = "underline";
                     document.getElementByName(diaAgdo).style.color = "#f7abc2";
                 } else {
-                    console.warn('Elemento no índice ' + i + ' é undefined');
+                    console.warn('Elemento no índice é undefined');
                 }
 
             if (lacunas.length > 0) {
