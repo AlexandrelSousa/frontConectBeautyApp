@@ -1624,12 +1624,6 @@ function preencherCalendario() {
                 } else {
                     console.warn('Elemento no índice é undefined');
                 }
-
-            if (lacunas.length > 0) {
-                lacunas[0].style.textDecoration = "underline";
-            } else {
-                console.warn('Nenhum elemento encontrado com o nome:', diaAgdo);
-            }
         });
     })
     .catch(error => {
