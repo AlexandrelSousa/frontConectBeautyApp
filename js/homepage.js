@@ -1610,7 +1610,11 @@ function preencherCalendario() {
             console.log("dia agdo: " + diaAgdo);
 
             var lacunas = document.getElementsByName(diaAgdo.toString());
-            console.log("lacuna: " + lacunas)
+            console.log("lacuna: " + lacunas[0])
+
+            var dataAtual = new Date();
+            var mesAtual = dataAtual.getMonth();
+            var anoAtual = dataAtual.getFullYear();
 
             for (var i = 0; i < lacunas.length; i++) {
                 console.log("Elemento " + i + ":", lacunas[i]);
