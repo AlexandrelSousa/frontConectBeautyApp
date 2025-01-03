@@ -1600,34 +1600,9 @@ function preencherCalendario() {
         return response.json();
     })
     .then(agendamentos => {
-        console.log("Agendamentos:", JSON.stringify(agendamentos, null, 2));
-
-        agendamentos.forEach(agendamento => {
-            console.log("agendamento.data: " + agendamento.data)
-
-            var diaAgdo = agendamento.data.substring(8, 10);
-            var mesAgdo = agendamento.data.substring(5, 7);
-            var anoAgdo = agendamento.data.substring(0, 4);
-
-            var mesAtual = new Date().getMonth() + 1;
-            var anoAtual = new Date().getFullYear();
-
-            console.log("dia agdo: " + diaAgdo + "\nmes agdo: " + mesAgdo + "\nano agdo: " + anoAgdo + "\n\nano atual: " + anoAtual + "\nmes atual: " + mesAtual);
-
-            var dataAtual = new Date();
-            var mesAtual = dataAtual.getMonth();
-            var anoAtual = dataAtual.getFullYear();
-
-            console.log(parseInt(mesAgdo, 10) + "\n" + dataAtual.getDate());
-
-            if (parseInt(mesAgdo, 10) === mesAtual && diaAgdo == dataAtual.getDate()) {
-                document.getElementByName(diaAgdo).style.textDecoration = "underline";
-                document.getElementByName(diaAgdo).style.color = "#f7abc2";
-            } else {
-                console.warn('Elemento no índice é undefined');
-            }
-            
-        });
+        for(let i = 0; i < agendamentos.length(); i++){
+            console.log(agendamentos[i]);
+        }
     })
     .catch(error => {
         console.error('Erro ao consultar agendamento: ', error);
