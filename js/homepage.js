@@ -1600,9 +1600,7 @@ function preencherCalendario() {
         return response.json();
     })
     .then(agendamentos => {
-        for(let i = 0; i < agendamentos.length(); i++){
-            console.log(agendamentos[i]);
-        }
+        console.log(agendamentos);
     })
     .catch(error => {
         console.error('Erro ao consultar agendamento: ', error);
