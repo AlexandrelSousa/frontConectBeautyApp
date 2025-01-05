@@ -151,56 +151,9 @@ fetch(url, {
             for (let i = 0; i < elementos.length; i++) {
                 elementos[i].style.width = "8%";
             }
-            meusProcedimentos();
         }
     })
     .catch(error => console.error('Erro:', error));
-
-function meusProcedimentos(){
-    var elemento = `
-    <div class="perfil-box-procedimentos-procedimentos">
-        <div class="perfil-box-procedimentos-imagem" id="perfil-box-procedimentos-imagem">
-            <img id="perfil-box-procedimentos-image-img" src="../assets/cilios-icon.svg" alt="" width="80%" height= "min-content">
-        </div>
-        <div class="perfil-box-procedimentos-informacoes">
-            <div class="perfil-box-procedimentos-informacoes-titulo">
-                <h3 id="perfil-box-procedimentos-titulo">Nome do Procedimento</h3>
-            </div>
-            <div class="perfil-box-procedimentos-informacoes-informacoes">
-                <div class="perfil-box-procedimentos-informacoes-informacoes-dados">
-                    <p id="perfil-box-procedimentos-preço">R$ 00,00</p>
-                    <button onClick="abrirExcluirProced(this)" id="btn0">EXCLUIR</button>
-                </div>
-                <div class="perfil-box-procedimentos-informacoes-informacoes-editar" id="0" onclick="abrirFormEditProced(this)">
-                    <img src="../assets/edit-icon-cor2.png">
-                    <label for="">EDITAR</label>
-                </div>
-            </div>
-        </div>
-    </div>`
-
-    const opcoes = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'authorization': token
-        }
-    }
-    /*fetch(URLAPI + "/api/" + agendamento[i].id_emp, options2)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao consular recurso');
-            }
-            return response.json();
-        })
-        .then(empresa => {
-            document.getElementById("agendamento-empresa-" + i).innerHTML = "Na empresa: " + empresa.nome
-        })
-        .catch(error => {
-            console.error('Erro ao consultar empresa ', error);
-        });*/
-        console.log("ID do cliente: " + id);
-}
 
 function perfilButton() {
     document.getElementById("perfil").style.display = "block"
@@ -256,7 +209,7 @@ function perfilButton() {
                             'authorization': token
                         }
                     }
-                    fetch(URLAPI + "/api/empresa" + agendamento[i].id_emp, options2)
+                    fetch(URLAPI + "/api/empresa/" + agendamento[i].id_emp, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consular recurso');
