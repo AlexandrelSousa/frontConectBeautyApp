@@ -1604,11 +1604,14 @@ function preencherCalendario() {
 
         var dataAtual = new Date();
         var mesAtual = dataAtual.getMonth() + 1;
+        if (/^(1|2|3|4|5|6|8|9)$/.test(mesAtual)) {
+            mesAtual = "0" + mesAtual;
+        }        
         var anoAtual = dataAtual.getFullYear();
 
         agendamentos.forEach(agendamento => {
-            var agdMes = agendamento.data.substring(0, 4);
-            var agdAno = agendamento.data.substring(5, 7);
+            var agdMes = agendamento.data.substring(5, 7);
+            var agdAno = agendamento.data.substring(0, 4);
 
             console.log("Mês do agendamento: " + agdMes + "\nAno do agendamento: " + agdAno + "\n")
         });
