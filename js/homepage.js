@@ -1615,9 +1615,8 @@ function preencherCalendario() {
             var agdDia = agendamento.data.substring(8, 10);
 
             if(agdMes == mesAtual && agdAno == anoAtual){
-                console.log("dia do agendamento: " + agdDia);
-
-                console.log(document.getElementsByName(agdDia));
+                document.getElementsByName(agdDia)[0].style.color = "#f7abc2";
+                document.getElementsByName(agdDia)[0].style.textDecoration = "underline";
             }            
         });
 
