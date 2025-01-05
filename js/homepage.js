@@ -1617,7 +1617,7 @@ function preencherCalendario() {
             if(agdMes == mesAtual && agdAno == anoAtual){
                 console.log("dia do agendamento: " + agdDia);
 
-                document.getElementsByName(agdDia).style.color = "red";
+                console.log(document.getElementsByName(agdDia));
             }            
         });
 
