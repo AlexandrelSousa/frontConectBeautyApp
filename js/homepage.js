@@ -1612,11 +1612,15 @@ function preencherCalendario() {
         agendamentos.forEach(agendamento => {
             var agdMes = agendamento.data.substring(5, 7);
             var agdAno = agendamento.data.substring(0, 4);
+            var agdDia = agendamento.data.substring(8, 10);
 
-            console.log("Mês do agendamento: " + agdMes + "\nAno do agendamento: " + agdAno + "\n")
+            if(agdMes == mesAtual && agdAno == anoAtual){
+                console.log("dia do agendamento: " + agdDia);
+
+                document.getElementsByName(agdDia).style.color = "red";
+            }            
         });
 
-        console.log("Mês atual: " + mesAtual + "\nAno atual: " + anoAtual);
     })
     .catch(error => {
         console.error('Erro ao consultar agendamento: ', error);
