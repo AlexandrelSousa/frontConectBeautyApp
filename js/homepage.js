@@ -1603,8 +1603,8 @@ function preencherCalendario() {
         console.log(agendamentos);
 
         var dataAtual = new Date();
-        var mesAtual = dataAtual.getMonth + 1;
-        var anoAtual = dataAtual.getDate;
+        var mesAtual = dataAtual.getMonth() + 1;
+        var anoAtual = dataAtual.getDate();
 
         console.log("Mês atual: " + mesAtual + "\nAno atual: " + anoAtual);
     })
