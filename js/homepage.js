@@ -222,7 +222,7 @@ function perfilButton() {
                         .catch(error => {
                             console.error('Erro ao consultar empresa ', error);
                         });
-                    fetch(URLAPI + "/api/procedimento/unico" + agendamento[i].id_pro, options2)
+                    fetch(URLAPI + "/api/procedimento/" + agendamento[i].id_pro, options2)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erro ao consular recurso');
